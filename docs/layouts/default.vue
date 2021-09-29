@@ -1,11 +1,11 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="primary" sticky>
-      <b-navbar-brand href="/">Home</b-navbar-brand>
+      <nuxt-link to="/" class="navbar-brand">Home</nuxt-link>
 
       <b-navbar-nav>
-        <b-nav-item href="about">About</b-nav-item>
-        <b-nav-item href="#">Exercises</b-nav-item>
+        <nuxt-link class="nav-link nav-item" to="about">About</nuxt-link>
+        <nuxt-link class="nav-link nav-item" to="#">Exercises</nuxt-link>
       </b-navbar-nav>
 
     </b-navbar>
