@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'wem-homepage',
+    title: 'Web Engineering WiSe21 | Jona Ittermann',
     htmlAttrs: {
       lang: 'en'
     },
