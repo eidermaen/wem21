@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Landing page</title>
+    <style>
+
+        body {
+            margin: 0;
+        }
+
+        nav {
+            background-color: rgb(54, 54, 54);
+            padding: 1rem;
+            display: flex;
+            color: white;
+            justify-content: center;
+        }
+
+        nav div {
+            padding: 0 2rem;
+        }
+
+        article {
+            background-color: rgb(235, 234, 230);
+            padding: 3rem;
+        }
+
+        .header {
+            font-weight: bold;
+            font-size: 30px;
+            word-spacing: .8rem;
+            letter-spacing: .2rem;
+            text-align: center;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .content img {
+            border-radius: .8rem;
+            border: 1px black solid;
+            width: 40%;
+            margin: 0 auto;
+        }
+
+        .bullets {
+            font-size: 21px;
+        }
+
+        .bullet {
+            margin: 4rem 0;
+        }
+
+        .submit-button {
+            padding: 1rem 7rem;
+            background-color: rgb(234, 146, 75);
+            color: white;
+            border-radius: .6rem;
+            border-width: 0;
+            text-transform: uppercase;
+        }
+
+        footer {
+            background-color: rgb(6, 23, 36);
+            color: white;
+            padding: 4rem 0 3rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+<nav>
+    <div>The book series</div>
+    <div>Testimonials</div>
+    <div>The Author</div>
+    <div>Free resources</div>
+</nav>
+
+<article>
+    <div class="header">You dont know JavaScript</div>
+
+    <div class="content">
+        <img src="https://kaul.inf.h-brs.de/wem/assets/img/landing-img.png" alt="Landing image">
+
+        <div class="bullets">
+            <p class="bullet">
+                Don't just drift through Javascript.
+            </p>
+
+            <p class="bullet">
+                Understand how Javascript works
+            </p>
+
+            <p class="bullet">
+                Start your journey through the bumpy side of Javascript
+            </p>
+
+            <button class="submit-button">
+                Order you copy now
+            </button>
+        </div>
+    </div>
+
+</article>
+
+<footer>
+    <div>The first ebook in the book series is absolutely free.</div>
+
+    <button class="submit-button" style="margin-top: 2rem">
+        Find out more about this offer
+    </button>
+</footer>
+</body>
+</html>

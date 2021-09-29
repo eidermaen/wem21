@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey Page</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .container {
+            background-color: #b2d6d1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form {
+            display: grid;
+            background-color: white;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 1.5rem;
+            row-gap: 1rem;
+            padding: 2rem 2rem 5rem;
+            width: 90%;
+            border-radius: .4rem;
+        }
+
+        .form-header {
+            grid-column-end: span 2;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .label {
+            text-align: right;
+        }
+
+        .center {
+            align-self: center;
+        }
+
+        .form-item {
+            justify-self: start;
+            width: 80%;
+        }
+
+        input[type="text"], input[type="number"], input[type="email"] {
+            padding: .4rem .3rem;
+            width: 50%;
+        }
+
+        select {
+            padding: .4rem .3rem;
+            width: 30%;
+        }
+
+        .required::before {
+            content: '*';
+            margin-right: 2px;
+            font-size: 10px;
+            vertical-align: text-top;
+        }
+
+        .list-elem {
+            display: block;
+            margin-bottom: .5rem;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Survey Form</h1>
+
+    <form class="form">
+        <p class="form-header">Let us know how we can improve freeCodeCamp</p>
+
+        <label for="name" class="label required center">Name:</label>
+        <div class="form-item">
+            <input type="text" id="name" placeholder="Enter your name" required>
+        </div>
+
+        <label for="email" class="label required center">Email:</label>
+        <div class="form-item">
+            <input type="email" id="email" placeholder="Enter you Email" required>
+        </div>
+
+        <label for="age" class="label required center">Age:</label>
+        <div class="form-item">
+            <input type="number" id="age" placeholder="Age" required>
+        </div>
+
+        <label for="role" class="label center">Which option best describes your current role?</label>
+        <div class="form-item">
+            <select name="role" id="role">
+                <option value="student">Student</option>
+                <option value="else">Something else</option>
+            </select>
+        </div>
+
+        <label for="recommendation" class="label required">How likely is that you would recommend <br> freeCodeCamp to a friend?</label>
+        <div class="form-item">
+            <div id="recommendation">
+                <div class="list-elem">
+                    <input type="radio" name="recommendation" id="definetly" value="definetly">
+                    <label for="definetly">Definetly</label>
+                </div>
+                <div class="list-elem">
+                    <input type="radio" name="recommendation" id="maybe" value="maybe">
+                    <label for="maybe">Maybe</label>
+                </div>
+                <div class="list-elem">
+                    <input type="radio" name="recommendation" id="notsure" value="notsure">
+                    <label for="notsure">Not sure</label>
+                </div>
+            </div>
+        </div>
+
+        <label for="fcc" class="label center">Waht do you like most in FCC:</label>
+        <div class="form-item">
+            <select name="fcc" id="fcc">
+                <option selected disabled>Select an option</option>
+            </select>
+        </div>
+
+        <label for="skills" class="label">Things that should be improved in the future <br> (Check all that apply):</label>
+        <div class="form-item">
+            <div id="skills">
+                <div class="list-elem">
+                    <input type="checkbox" name="frontend" id="frontend" value="frontend">
+                    <label for="frontend">Front-end Projects</label>
+                </div>
+                <div class="list-elem">
+                    <input type="checkbox" name="backend" id="backend" value="backend">
+                    <label for="backend">Back-end Projects</label>
+                </div>
+                <div class="list-elem">
+                    <input type="checkbox" name="visual" id="visual" value="visual">
+                    <label for="visual">Data Visualization</label>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
