@@ -6,7 +6,7 @@
     </p>
 
     <h3 class="mt-5">Contact</h3>
-    <form name="wem_contact" netlify>
+    <form name="wem_contact" method="post" data-netlify="true">
       <b-form-group label="Name" description="Enter your name.">
         <b-form-input name="name" type="text" required />
       </b-form-group>
