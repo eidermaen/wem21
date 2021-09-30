@@ -45,6 +45,12 @@ export default {
   // Content module configuration: https://go.nuxtjs.dev/config-content
   content: {},
 
+  storybook: {
+    stories: [
+      '~/stories/**/*.stories.js',
+    ],
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

@@ -6,7 +6,9 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "storybook": "nuxt storybook",
+    "storybook:build": "nuxt storybook build -o ./dist/storybook"
   },
   "dependencies": {
     "@nuxt/content": "^1.14.0",
@@ -15,5 +17,8 @@
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@nuxtjs/storybook": "^4.1.1",
+    "postcss": "^8.3.8"
+  }
 }

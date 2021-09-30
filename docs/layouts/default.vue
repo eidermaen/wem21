@@ -6,6 +6,7 @@
       <b-navbar-nav>
         <nuxt-link class="nav-link nav-item" to="about">About</nuxt-link>
         <nuxt-link class="nav-link nav-item" to="#">Exercises</nuxt-link>
+        <b-nav-item href="storybook">Storybook</b-nav-item>
       </b-navbar-nav>
 
     </b-navbar>
