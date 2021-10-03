@@ -10,6 +10,7 @@
       <div class="position-absolute invisible">
         <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
       </div>
+      <input type="hidden" name="form-name" value="wem_contact" />
       <b-form-group label="Name" description="Enter your name.">
         <b-form-input name="name" type="text" required />
       </b-form-group>
