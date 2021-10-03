@@ -6,7 +6,10 @@
     </p>
 
     <h3 class="mt-5">Contact</h3>
-    <form name="wem_contact" method="post" action="/form-success" data-netlify="true">
+    <form name="wem_contact" method="post" action="/form-success" data-netlify="true" data-netlify-honeypot="bot-field">
+      <div class="position-absolute invisible">
+        <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+      </div>
       <b-form-group label="Name" description="Enter your name.">
         <b-form-input name="name" type="text" required />
       </b-form-group>
