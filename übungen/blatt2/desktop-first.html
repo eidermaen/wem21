@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flexbox Desktop-First</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 2rem;
+            --side-withs: 15%;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: calc(100vw - 4rem);
+            height: calc(100vh - 4rem);
+        }
+
+        .top {
+            background-color: red;
+            height: 30%;
+        }
+
+        .main {
+            display: flex;
+            height: 68%;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .left {
+            background-color: green;
+            width: var(--side-withs);
+        }
+
+        .middle {
+            background-color: blue;
+            width: calc(100% - 2 * var(--side-withs) - 3rem);
+        }
+
+        .right {
+            background-color: purple;
+            width: var(--side-withs);
+        }
+
+        @media (max-width: 800px) {
+            .container {
+                justify-content: flex-start;
+            }
+
+            .main {
+                justify-content: normal;
+                flex-wrap: wrap;
+            }
+
+            .top {
+                height: 15%;
+            }
+
+            .middle {
+                width: calc(100% - var(--side-withs));
+            }
+            .right {
+                width: 100%;
+                height: 15%;
+            }
+        }
+
+        @media (max-width: 375px) {
+
+            body {
+                margin: 0;
+            }
+
+            .container, .left, .middle, .right {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="top">
+
+    </div>
+
+    <div class="main">
+        <div class="left"></div>
+        <div class="middle"></div>
+        <div class="right"></div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Grid Mobile-First</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .container {
+            display: grid;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            grid-template-rows: 1fr 1fr 8fr 1fr;
+            grid-template-columns: 1fr;
+        }
+
+        .header {
+            background-color: red;
+        }
+
+        .main {
+            background-color: blue;
+        }
+
+        .left {
+            background-color: green;
+        }
+
+        .right {
+            background-color: purple;
+        }
+
+        @media(min-width: 800px) {
+
+            .container {
+                grid-template-rows: 1fr 5fr 1fr;
+                grid-template-columns: repeat(5, 1fr);
+                column-gap: .5rem;
+                row-gap: 1rem;
+            }
+
+            .header {
+                grid-column: 1 / span 5;
+            }
+
+            .main {
+                grid-column: 2 / span 4;
+            }
+
+            .right {
+                grid-column: 1 / span 5;
+            }
+        }
+
+        @media(min-width: 1000px) {
+            .container {
+                grid-template-rows: 1fr 5fr;
+            }
+
+            .main {
+                grid-column: 2 / span 3;
+            }
+
+            .right {
+                grid-column: 5 / span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header"></div>
+    <div class="left"></div>
+    <main class="main"></main>
+    <div class="right"></div>
+</div>
+</body>
+</html>
