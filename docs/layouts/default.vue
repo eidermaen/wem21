@@ -1,17 +1,17 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="primary" sticky>
-      <nuxt-link to="/" class="navbar-brand">Home</nuxt-link>
+    <nav>
+      <nuxt-link to="/" class="nav-home">Home</nuxt-link>
 
-      <b-navbar-nav>
-        <nuxt-link class="nav-link nav-item" to="about">About</nuxt-link>
-        <nuxt-link class="nav-link nav-item" to="#">Exercises</nuxt-link>
-        <b-nav-item href="storybook">Storybook</b-nav-item>
-      </b-navbar-nav>
+      <span>
+        <nuxt-link to="about">About</nuxt-link>
+        <nuxt-link to="#">Exercises</nuxt-link>
+        <a href="storybook">Storybook</a>
+      </span>
 
-    </b-navbar>
+    </nav>
 
-    <main class="container mt-4">
+    <main class="container">
       <Nuxt/>
     </main>
 
@@ -24,3 +24,36 @@
 <script>
 export default {}
 </script>
+
+<style>
+body {
+  margin: 0;
+}
+
+nav {
+  padding: 1.2rem;
+  background-color: #1D3557;
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  color: #F1FAEE;
+  text-decoration: none;
+  margin-right: 1rem;
+}
+
+nav .nuxt-link-active {
+  color: #E63946;
+}
+
+.nav-home {
+  font-size: 1.5rem;
+  margin-right: 2rem;
+}
+
+.container {
+  max-width: 80%;
+  margin: 2rem auto;
+}
+</style>
