@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tabellenkalkulation</title>
+
+    <script defer src="script.js"></script>
+
+    <style>
+        body {
+            width: 90%;
+            margin: 3rem auto;
+        }
+
+        form {
+            margin: 1rem 0;
+            width: 50%;
+        }
+
+        .form-group {
+            margin-top: .9rem;
+        }
+
+        label {
+            display: block;
+            color: darkcyan;
+        }
+
+        input {
+            width: 70%;
+            padding: .5rem;
+            outline: none;
+            border: 2px solid lightgray;
+            border-radius: .2rem;
+            transition: all 200ms;
+        }
+        input:focus {
+            border-color: #26C485;
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
+
+        .button {
+            padding: .6rem 1rem;
+            background-color: darkcyan;
+            border: none;
+            border-radius: .4rem;
+            color: white;
+            font-weight: bold;
+            transition: all 200ms;
+        }
+
+        .button:hover {
+            background-color: #26C485;
+        }
+
+        table {
+            border-collapse: collapse;
+            text-align: right;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        td:nth-child(1), tr:nth-child(1) {
+            background-color: #e1e2ee;
+        }
+
+        td:nth-child(1) {
+            width: 5%;
+        }
+
+        .input-cell {
+            cursor: pointer;
+        }
+
+        .input-cell:focus {
+            background-color: #26C485;
+        }
+
+        .formula-cell {
+            background-color: lightseagreen;
+        }
+    </style>
+</head>
+<body>
+<h1>Tabellenkalkulation</h1>
+
+<form id="form">
+    <div class="form-group">
+        <label for="columns">Spalten:</label>
+        <input type="number" id="columns" required min="1">
+    </div>
+
+    <div class="form-group">
+        <label for="rows">Zeilen:</label>
+        <input type="number" id="rows" required min="1">
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">Generate Table</button>
+    </div>
+</form>
+
+<table id="table"></table>
+</body>
+</html>

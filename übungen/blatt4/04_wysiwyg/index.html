@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WYSIWYG-Editor</title>
+
+    <script src="https://kit.fontawesome.com/e08932c137.js" crossorigin="anonymous"></script>
+    <script defer src="script.js"></script>
+
+    <style>
+        body {
+            width: 50%;
+            margin: 3rem auto;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: .6rem;
+            width: 100%;
+            padding: .8rem;
+            border: 1px solid #1D3557;
+            border-radius: .2rem;
+        }
+
+        a.toolbar-item {
+            color: #1D3557;
+            text-decoration: none;
+        }
+
+        .toolbar-item {
+            display: inline-flex;
+            align-items: center;
+            padding: .5rem;
+            border: 1px solid black;
+            border-radius: .4rem;
+        }
+
+        .editor {
+            width: 100%;
+            outline: none;
+            margin-top: 2rem;
+            padding: .8rem;
+            border: 2px solid #1D3557;
+            border-radius: .4rem;
+            resize: vertical;
+            transition: all 200ms;
+            min-height: 15rem;
+        }
+
+        .editor:focus {
+            border-color: #26C485;;
+        }
+    </style>
+</head>
+<body>
+
+<h1>WYSIWYG-Editor</h1>
+
+<div class="toolbar" id="toolbar">
+    <a href="#" class="toolbar-item" data-command='h1'>H1</a>
+    <a href="#" class="toolbar-item" data-command='h2'>H2</a>
+    <a href="#" class="toolbar-item" data-command='h3'>H3</a>
+    <a href="#" class="toolbar-item" data-command='bold'><i class="fas fa-bold"></i></a>
+    <a href="#" class="toolbar-item" data-command='italic'><i class="fas fa-italic"></i></a>
+    <a href="#" class="toolbar-item" data-command='underline'><i class="fas fa-underline"></i></a>
+    <a href="#" class="toolbar-item" data-command='justifyLeft'><i class='fa fa-align-left'></i></a>
+    <a href="#" class="toolbar-item" data-command='justifyCenter'><i class='fa fa-align-center'></i></a>
+    <a href="#" class="toolbar-item" data-command='justifyRight'><i class='fa fa-align-right'></i></a>
+    <a href="#" class="toolbar-item" data-command='createLink'><i class='fa fa-link'></i></a>
+    <a href="#" class="toolbar-item" data-command='insertUnorderedList'><i class='fa fa-list-ul'></i></a>
+    <a href="#" class="toolbar-item" data-command='insertOrderedList'><i class='fa fa-list-ol'></i></a>
+    <a href="#" class="toolbar-item" data-command='superscript'><i class='fa fa-superscript'></i></a>
+    <a href="#" class="toolbar-item" data-command='undo'><i class='fa fa-undo'></i></a>
+</div>
+
+<div id="editor" class="editor" contenteditable>
+</div>
+
+</body>
+</html>
