@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Web Worker</title>
+    <!--    <script defer src="script.js"></script>-->
+    <script defer src="webworker.js"></script>
+    <style>
+        progress{
+            width:100%;
+            height:20px;
+            background-color:pink;
+            border-radius: 4px;
+            box-shadow: 0 3px 6px rgba(255, 255, 0, 255) inset;
+        }
+
+        .flex {
+            width: 60%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="flex">
+        <progress id="bar" data-direction="up" value="0" max="100">
+        </progress>
+    </div>
+    <div id="primes">
+
+    </div>
+</div>
+
+<script>
+	const primeWorker = new Worker('worker.js');
+
+	const progressBar = document.getElementById('bar');
+	const primes = document.getElementById('primes');
+
+	setInterval(() => {
+		const direction = progressBar.dataset.direction;
+		const currentValue = progressBar.value;
+		let newValue;
+		switch (direction) {
+			case 'up': {
+				if (currentValue < 100) {
+					newValue = currentValue + 1;
+				} else {
+					newValue = 99;
+					progressBar.dataset.direction = 'down';
+				}
+				break;
+			}
+			case 'down': {
+				if (currentValue > 0) {
+					newValue = currentValue - 1;
+				} else {
+					newValue = 1;
+					progressBar.dataset.direction = 'up';
+				}
+				break;
+			}
+		}
+		progressBar.value = newValue;
+	}, 0);
+
+	let initialValue = BigInt(3_000_000);
+
+	primeWorker.postMessage(initialValue);
+	primeWorker.onmessage = e => {
+		const {number, isPrime} = e.data;
+
+		if (isPrime) {
+			const div = document.createElement('div');
+			div.innerText = number;
+			primes.prepend(div);
+		}
+		initialValue++;
+		primeWorker.postMessage(initialValue);
+	}
+
+</script>
+</body>
+</html>
