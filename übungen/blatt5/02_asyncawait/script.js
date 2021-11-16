@@ -20,11 +20,7 @@ let result = [];
 		};
 
 		const result = [];
-		const responses = [];
-
-		const dataOne = await fileOne();
-		const dataTwo = await fileTwo();
-		responses.push(dataOne, dataTwo);
+		const responses = await Promise.all(fileOne, fileTwo);
 
 		for (let i = 0; i < responses[1].length; i++) {
 			result[i] += responses[1][i];

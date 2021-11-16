@@ -4,8 +4,6 @@ const leftSidebar = document.getElementById('left-sidebar');
 const rightSidebar = document.getElementById('right-sidebar');
 const contentDiv = document.getElementById('content');
 
-const pathParams = new URLSearchParams(window.location.search);
-
 const topButtons = [];
 
 const generateButton = (title, index) => {
@@ -22,8 +20,6 @@ fetch(URL)
 	.then(result => result.json())
 	.then(data => {
 		topNavBar.innerText = '';
-		const selectedTop = pathParams.get('top');
-		const selectedLeft = pathParams.get('left');
 
 		Object.keys(data).forEach((topKey, topIndex) => {
 			const btn = generateButton(topKey, topIndex);
@@ -42,27 +38,30 @@ fetch(URL)
 					leftSidebar.appendChild(leftBtn);
 
 					leftBtn.onclick = () => {
+						rightSidebar.innerText = '';
 						sideBarButtons.forEach(b => b.classList.remove('btn-active'));
 						leftBtn.classList.add('btn-active');
 						const content = data[topKey][leftKey].content;
 						contentDiv.innerText = content;
+
+						data[topKey][leftKey].references.forEach(r => {
+							const div = document.createElement('div');
+							const a = document.createElement('a');
+							a.href = r;
+							a.target = '_blank';
+							a.innerText = r;
+							div.appendChild(a);
+							rightSidebar.appendChild(div);
+						});
 					}
 
-					if (selectedTop && selectedLeft) {
-						if (leftIndex === selectedLeft) {
-							leftBtn.click();
-						}
-					} else if (leftIndex === 0) {
+					if (leftIndex === 0) {
 						leftBtn.click();
 					}
 				});
 			}
 
-			if (selectedTop) {
-				if (topIndex === selectedTop) {
-					btn.click();
-				}
-			} else if (topIndex === 0) {
+			if (topIndex === 0) {
 				btn.click();
 			}
 		});
