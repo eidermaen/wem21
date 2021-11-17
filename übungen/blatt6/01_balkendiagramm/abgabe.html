@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Statistik-Balkendiagramm</title>
+
+    <style>
+        .bar {
+            transition: all 300ms;
+            cursor: pointer;
+        }
+
+        .bar-inactive {
+            filter: brightness(70%);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Balkendiagramm</h1>
+    <div>
+        <svg id="svg" width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="500" height="500" fill="white"/>
+        </svg>
+    </div>
+</div>
+
+
+<script>
+	const svg = document.getElementById('svg');
+	const SVG_NS = 'http://www.w3.org/2000/svg';
+
+	const data = JSON.parse(`[
+  {
+    "name": "SPD",
+    "seats": 206,
+    "color": "red"
+  },
+  {
+    "name": "CDU/CSU",
+    "seats": 197,
+    "color": "black"
+  },
+  {
+    "name": "Bündnis 80/ Die Grüne",
+    "seats": 118,
+    "color": "green"
+  },
+  {
+    "name": "FDP",
+    "seats": 92,
+    "color": "yellow"
+  },
+  {
+    "name": "AfD",
+    "seats": 82,
+    "color": "blue"
+  },
+  {
+    "name": "Die Linke",
+    "seats": 39,
+    "color": "pink"
+  },
+  {
+    "name": "fratkionslos",
+    "seats": 2,
+    "color": "gray"
+  }
+]`);
+	doTheRest(data);
+
+	function doTheRest(data) {
+		const textGroup = document.createElementNS(SVG_NS, 'g');
+		const barGroup = document.createElementNS(SVG_NS, 'g');
+
+		data.forEach((d, index) => {
+			const y = (index + 1) * 40;
+			textGroup.appendChild(createLegendTextItem(d.name, y));
+
+			barGroup.appendChild(createSvgBar(d, y));
+
+		});
+		svg.append(textGroup, barGroup);
+	}
+
+	function createSvgBar(data, y) {
+		const bar = document.createElementNS(SVG_NS, 'rect');
+		const height = 10;
+		setAttribute(bar, 'fill', data.color);
+		setAttribute(bar, 'width', data.seats);
+		setAttribute(bar, 'height', height);
+		setAttribute(bar, 'x', '200');
+		setAttribute(bar, 'y', y - height);
+		bar.classList.add('bar');
+		bar.onmouseover = onBarMouseOver;
+		bar.onmouseleave = onBarMouseLeave;
+
+		return bar;
+	}
+
+	function createLegendTextItem(label, y) {
+		const text = document.createElementNS(SVG_NS, 'text');
+		setAttribute(text, 'x', '10');
+		setAttribute(text, 'y', y);
+		setAttribute(text, 'fill', 'black');
+		text.textContent = label;
+		return text;
+	}
+
+	function setAttribute(node, attribute, value) {
+		node.setAttributeNS(null, attribute, value);
+	}
+
+	function onBarMouseOver(e) {
+		const bars = document.querySelectorAll('.bar');
+		bars.forEach(b => {
+			if (b !== e.target) {
+				b.classList.add('bar-inactive');
+			}
+		})
+	}
+
+	function onBarMouseLeave(e) {
+		const bars = document.querySelectorAll('.bar');
+		bars.forEach(b => b.classList.remove('bar-inactive'));
+	}
+
+</script>
+</body>
+</html>
