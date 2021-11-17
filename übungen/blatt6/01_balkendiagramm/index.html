@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Statistik-Balkendiagramm</title>
+    <script defer src="script.js"></script>
+
+    <style>
+        .bar {
+            transition: all 600ms;
+            cursor: pointer;
+        }
+
+        .bar-inactive {
+            fill: lightgray;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Balkendiagramm</h1>
+    <div>
+        <svg id="svg" width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="500" height="500" fill="white"/>
+        </svg>
+    </div>
+</div>
+</body>
+</html>

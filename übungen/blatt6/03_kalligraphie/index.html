@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Kalligraphie-Editor</title>
+    <style>
+        body {
+            background-color: gray;
+        }
+
+        .heading {
+            padding: 2rem;
+            border-radius: .3rem;
+            background-color: white;
+        }
+
+        .outer {
+            position: absolute;
+            width: 90vw;
+            margin: 2rem;
+            height: 80vh;
+        }
+
+        #editor {
+            position: relative;
+            background-color: white;
+            padding: 2rem;
+            width: 100%;
+            height: 80%;
+            cursor: cell;
+        }
+
+        path {
+            fill: none;
+            stroke: black;
+            stroke-width: 2;
+        }
+    </style>
+</head>
+<body>
+<h1 class="heading">Kalligraphie-Editor</h1>
+<div class="outer">
+    <svg id="editor">
+    </svg>
+</div>
+<script>
+    const editor = document.getElementById('editor');
+	const SVG_NS = 'http://www.w3.org/2000/svg';
+
+	let startDragPosition = null;
+	editor.onmousedown = onStartPaint;
+	editor.onmousemove = paint;
+	editor.onmouseup = onStopPaint;
+
+
+	function onStartPaint(e) {
+		startDragPosition = getMousePosition(e);
+    }
+
+	function paint(e) {
+		if (startDragPosition) {
+			const newMousePosition = getMousePosition(e);
+			editor.appendChild(drawPath(startDragPosition, newMousePosition));
+			startDragPosition = newMousePosition;
+		}
+    }
+
+	function onStopPaint() {
+		startDragPosition = null;
+    }
+
+	function getMousePosition(e) {
+		const CTM = editor.getScreenCTM();
+		return {
+			x: (e.clientX - CTM.e) / CTM.a,
+			y: (e.clientY - CTM.f) / CTM.d
+		};
+    }
+
+	function drawPath(startCoordinates, endCoordinates) {
+		const path = document.createElementNS(SVG_NS, 'path');
+		let direction = '';
+		direction += `M${startCoordinates.x} ${startCoordinates.y}`;
+		direction += ` L${endCoordinates.x} ${endCoordinates.y}`;
+
+		setAttribute(path, 'd', direction);
+		return path;
+    }
+
+	function setAttribute(node, attribute, value) {
+		node.setAttributeNS(null, attribute, value);
+    }
+
+</script>
+</body>
+</html>
