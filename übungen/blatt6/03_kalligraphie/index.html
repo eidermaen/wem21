@@ -58,13 +58,11 @@
 
 	function onStartPaint(e) {
 		startDragPosition = getMousePosition(e);
-		editor.appendChild(createPoint(startDragPosition));
     }
 
 	function paint(e) {
 		if (startDragPosition) {
 			const newMousePosition = getMousePosition(e);
-			editor.appendChild(createPoint(newMousePosition));
 			editor.appendChild(drawPath(startDragPosition, newMousePosition));
 			startDragPosition = newMousePosition;
 		}
@@ -80,16 +78,6 @@
 			x: (e.clientX - CTM.e) / CTM.a,
 			y: (e.clientY - CTM.f) / CTM.d
 		};
-    }
-
-	function createPoint(position) {
-		if (position) {
-			const circle = document.createElementNS(SVG_NS, 'circle');
-			setAttribute(circle, 'cx', position.x);
-			setAttribute(circle, 'cy', position.y);
-			setAttribute(circle, 'fill', 'none');
-			return circle;
-		}
     }
 
 	function drawPath(startCoordinates, endCoordinates) {
