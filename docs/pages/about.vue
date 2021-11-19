@@ -84,14 +84,16 @@ input:focus, textarea:focus {
   font-weight: bold;
   border: none;
   border-radius: .3rem;
-}
-
-button:hover {
   cursor: pointer;
+  transition: all 300ms;
 }
 
 .btn-submit {
   background-color: #26C485;
   color: #146746;
+}
+
+.btn-submit:hover {
+  background-color: #08e88f;
 }
 </style>

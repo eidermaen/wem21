@@ -1,0 +1,1 @@
+Wurde von Marc Andreesen entdeck. Er baute den ersten Webbrowser (Mosaic), welcher als Grundlage vieler der aktuellen Browser diente. Dieser trug mit zum Erfolg des WWW bei. Weiterhein spielt Dezentralität und die unabhängige Entwicklung in verschiedene Dimensionen (HTTP Protokoll, HTML, URI) eine wichtige Rolle.

@@ -5,7 +5,7 @@
 
       <span>
         <nuxt-link to="about">About</nuxt-link>
-        <nuxt-link to="#">Exercises</nuxt-link>
+        <nuxt-link to="exercises">Exercises</nuxt-link>
         <a href="storybook">Storybook</a>
       </span>
 
@@ -55,5 +55,15 @@ nav .nuxt-link-active {
 .container {
   max-width: 80%;
   margin: 2rem auto;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
 }
 </style>

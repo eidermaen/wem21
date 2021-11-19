@@ -1,0 +1,2 @@
+1. Chef TBL: Verwechslung Wagheit mit Evolvierbarkeit
+2. Hypertext Community sah Proposal als Rückschritt an: Sie wollten keine "Broken links". Zudem vorderten sie mathematische Rigorosität und ein Objekt- und kein Text-Protokoll. Sie sahen ihre Arbeiten als schon weiter fortgeschritten an. Sie stellten sich unter Hypertext etwas anderes vor.

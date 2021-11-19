@@ -1,0 +1,14 @@
+{
+  "1": {
+    "sheet": 1,
+    "name": "Einführung",
+    "exercises": [
+      {
+        "id": 1,
+        "name": "Some exercise",
+        "type": "text",
+        "file": "/01/1.txt"
+      }
+    ]
+  }
+}
