@@ -46,9 +46,17 @@ export default {
   generate: {
     async routes () {
       const { $content } = require('@nuxt/content');
+      const exercises = require('./data/data.json');
+
       const files = await $content({ deep: true }).only(['path']).fetch();
 
-      return files.map(file => file.path === '/index' ? '/' : file.path);
+      const numberPaths = exercises.map(e => e.exercises.map(ex => '/exercises/' + e.id + '/' + ex.id)).flat();
+
+      return [
+        ...files.map(file => file.path === '/index' ? '/' : file.path),
+        ...exercises.map(e => '/exercise/' + e.id),
+        ...numberPaths,
+      ];
     }
   },
 
