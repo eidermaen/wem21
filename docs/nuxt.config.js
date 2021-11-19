@@ -50,13 +50,21 @@ export default {
 
       const files = await $content({ deep: true }).only(['path']).fetch();
 
-      const numberPaths = exercises.map(e => e.exercises.map(ex => '/exercises/' + e.id + '/' + ex.id)).flat();
+      const exercisePaths = [];
+      const numberPaths = [];
+      Object.values(exercises).forEach(e => {
+        exercisePaths.push('/exercises/' + e.sheet);
+        numberPaths.push(...e.exercises.map(ex => '/exercises/' + e.sheet + '/' + ex.id));
+      });
 
-      return [
+      const output = [
         ...files.map(file => file.path === '/index' ? '/' : file.path),
-        ...exercises.map(e => '/exercise/' + e.id),
-        ...numberPaths,
+        ...(numberPaths.flat()),
+        ...(exercisePaths.flat()),
       ];
+
+      console.log('output', output);
+      return output;
     }
   },
 
