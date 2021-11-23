@@ -8,6 +8,12 @@
         "name": "Some exercise",
         "type": "text",
         "file": "/01/1.txt"
+      },
+      {
+        "id": 3,
+        "name": "Tribute page",
+        "type": "html",
+        "file": "/01/tribute.html"
       }
     ]
   }
