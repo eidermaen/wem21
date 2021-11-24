@@ -1,11 +1,11 @@
 import * as fs from 'fs';
-import * as stream from 'stream';
 import * as util from 'util';
 
-const pipeline = util.promisify(stream.pipeline);
+const readFile = util.promisify(fs.readFile);
 
 const firstFile = process.argv[2];
 const secondFile = process.argv[3];
+
 
 (async _ => {
 	if (!firstFile || !secondFile) {
@@ -15,25 +15,11 @@ const secondFile = process.argv[3];
 
 		console.time('MERGE');
 
-		await pipeline(
-			fs.createReadStream(firstFile, 'utf8'),
-			async data => {
-				for await (const chunk of data) {
-					const split = chunk.split('\n');
-					output[0].push(...split);
-				}
-			}
-		);
+		const fileOne = await readFile(firstFile, 'utf8');
+		const fileTwo = await readFile(secondFile, 'utf8');
 
-		await pipeline(
-			fs.createReadStream(secondFile, 'utf8'),
-			async data => {
-				for await (const chunk of data) {
-					const split = chunk.split('\n');
-					output[1].push(...split);
-				}
-			}
-		);
+		output[0].push(...fileOne.split('\n'));
+		output[1].push(...fileTwo.split('\n'));
 
 		const outputFile = 'output.txt';
 		let outputString = '';
@@ -58,4 +44,4 @@ const secondFile = process.argv[3];
 			}
 		});
 	}
-})()
+})();

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>File Merger</title>
+</head>
+
+<style>
+    .container {
+        max-width: 50%;
+        margin: 3rem auto;
+    }
+
+    .heading {
+        padding: 1rem 3rem;
+        border-radius: .5rem;
+        background-color: #FFBD00;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .hero {
+        font-size: 25px;
+    }
+
+    .content {
+        margin-top: 3rem;
+    }
+
+    .fields {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .form-group {
+        position: relative;
+    }
+
+    .label {
+        display: inline-block;
+        cursor: pointer;
+        padding: 1rem 2rem;
+        color: white;
+        font-weight: bold;
+        background-color: #146746;
+        border-radius: .3rem;
+        transition: all 300ms;
+    }
+
+    .label:hover {
+        background-color: #26C485;
+    }
+
+    input[type="file"] {
+        position: absolute;
+        z-index: -1;
+        top: 10px;
+        left: 1.8rem;
+        font-size: 17px;
+        color: #7F828B;
+    }
+
+    .form-footer {
+        margin-top: 3rem;
+        text-align: center;
+    }
+
+    .btn {
+        padding: 1rem 2rem;
+        border-radius: .3rem;
+        background-color: #E63946;
+        color: white;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 300ms;
+    }
+
+    .btn:hover {
+        background-color: #ED6E78;
+    }
+</style>
+<body>
+
+<div class="container">
+    <div class="heading">
+        <h1 class="center">Willkommen beim File Merger!</h1>
+    </div>
+
+    <div class="content">
+        <p class="hero center">
+            Wähle 2 Dateien aus, die miteinander gemerged werden sollen.
+        </p>
+
+        <form action="/rest/merge" method="post" enctype="multipart/form-data">
+            <div class="fields">
+                <div class="form-group">
+                    <label for="first" class="label">Datei 1</label>
+                    <input type="file" id="first" name="first" required accept="text/plain">
+                </div>
+
+                <div class="form-group">
+                    <label for="second" class="label">Datei 2</label>
+                    <input type="file" id="second" name="second" required accept="text/plain">
+                </div>
+            </div>
+
+            <div class="form-footer">
+                <button type="submit" class="btn">Hochladen und Mergen</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
