@@ -7,7 +7,6 @@ const path = require('path');
 const util = require('util');
 const promisify = util.promisify;
 
-const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 
 const { customAlphabet } = require('nanoid');
@@ -61,7 +60,7 @@ app.post('/rest/merge', filesUpload, async (req, res, next) => {
 
 });
 
-app.get('/rest/download/:id', async (req, res, next) => {
+app.get('/rest/download/:id', async (req, res) => {
 	const id = req.params.id;
 	if (!id) {
 		return res.redirect('/');
@@ -69,7 +68,9 @@ app.get('/rest/download/:id', async (req, res, next) => {
 
 	res.download(path.join(__dirname, `downloads/${id}.txt`), 'merge.txt');
 
-	fs.unlink(`downloads/${id}.txt`, () => {});
+	setTimeout(() => {
+		fs.unlink(`downloads/${id}.txt`, () => {})
+	}, 1000);
 });
 
 app.use((err, req, res, next) => {
