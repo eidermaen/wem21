@@ -40,7 +40,7 @@ class MenuWrapper extends LitElement {
 	}
 
 	_clickButton = e => {
-		var btn = e.target;
+		const btn = e.target;
 		this._slottedChildren.forEach(el => {
 			if (el.getAttribute('id') === btn.getAttribute('id')) {
 				el.setActive(true);

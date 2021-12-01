@@ -1,4 +1,4 @@
-import {LitElement, html, css} from 'https://unpkg.com/lit-element@3.0.2/lit-element.js?module';
+import {LitElement, html, css, ref, createRef} from 'https://unpkg.com/lit-element@3.0.2/lit-element.js?module';
 
 class ShoppingList extends LitElement {
 	static properties = {
@@ -90,6 +90,7 @@ class ShoppingList extends LitElement {
 		this.label = 'Enter new item';
 		this.buttonText = 'Add item';
 		this._elements = [];
+		this.inputRef = createRef();
 	}
 
 	render () {
@@ -98,7 +99,7 @@ class ShoppingList extends LitElement {
                 <div class="form-group">
                     <label for="input">${this.label}: </label>
                     <div class="input-group">
-                        <input type="text" id="input" required/>
+                        <input type="text" id="input" required ${ref(this.inputRef)}/>
                         <button type="submit" id="button">${this.buttonText}</button>
                     </div>
                 </div>
@@ -112,8 +113,10 @@ class ShoppingList extends LitElement {
 		`
 	}
 
-	_submitForm(e) {
+	_submitForm = e => {
 		e.preventDefault();
+
+		console.log('this.inputValue', this.inputRef.value);
 
 		const list = this.renderRoot.querySelector('#list');
 		const input = this.renderRoot.querySelector('#input');
@@ -134,7 +137,10 @@ class ShoppingList extends LitElement {
 
 		liElement.append(spanElement, deleteButton);
 
-		list.appendChild(liElement);
+		this._elements.push(html`${liElement}`);
+		this.requestUpdate();
+
+		//list.appendChild(liElement);
 		input.value = null;
 	}
 }
