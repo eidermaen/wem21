@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="WEM PWA Navigator written in VanillaJS">
+    <title>My PWA</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="worker.js"></script>
+    <script defer src="js/component.js" type="module"></script>
+    <script defer src="js/script.js" type="module"></script>
+</head>
+<body>
+<div class="container">
+    <div class="top">
+        <h1>WWW-Navigator</h1>
+        <menu-wrapper id="navbar-links">
+            Loading . . .
+        </menu-wrapper>
+    </div>
+    <div class="left">
+        <menu-wrapper vertical="true" id="left-sidebar">
+            Loading . . .
+        </menu-wrapper>
+    </div>
+    <div class="content" id="content">
+        Loading . . .
+    </div>
+    <div class="right" id="right-sidebar">
+        Loading . . .
+    </div>
+    <div class="footer">
+        <h2>Footer</h2>
+        <a href="#">Sitemap</a>
+        <a href="#">Home</a>
+        <a href="#">News</a>
+        <a href="#">Contact</a>
+        <a href="#">About</a>
+    </div>
+</div>
+</body>
+</html>
