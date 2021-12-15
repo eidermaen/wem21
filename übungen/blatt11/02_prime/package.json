@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "php-wasm": "^0.0.4-b",
+    "wasm2wat": "^1.1.1"
+  }
+}
