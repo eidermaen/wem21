@@ -12,17 +12,64 @@ const isPrime = number => {
 }
 
 const resultDiv = document.querySelector('#result');
-let primes = 0;
+const singleButton = document.querySelector('#js');
+const multiButton = document.querySelector('#multi');
 
-const start = Date.now();
-for (let i = 1; i < 100_001; i++) {
-	if (isPrime(i)) {
-		primes++;
+const startExecution = () => {
+	let primes = 0;
+
+	const start = Date.now();
+	for (let i = 1; i < 100_001; i++) {
+		if (isPrime(i)) {
+			primes++;
+		}
+	}
+	const end = Date.now();
+
+	return {
+		primes,
+		time: end - start
 	}
 }
-const end = Date.now();
 
-resultDiv.innerHTML = `
+singleButton.onclick = () => {
+	const {primes, time} = startExecution();
+
+	resultDiv.innerHTML = `
 	<div>There are <strong>${primes}</strong> primes.</div>
-	<div>Calculation took ${end - start} ms for JS.</div>
+	<div>Calculation took ${time} ms for JS.</div>
 `;
+};
+
+multiButton.onclick = () => {
+	const times = [];
+	let highest = 0;
+	let lowest = Number.POSITIVE_INFINITY;
+	let totalPrimes = 0;
+
+	for (let i = 0; i < 10; i++) {
+		console.log('i', i);
+		const {time, primes} = startExecution();
+		totalPrimes = primes;
+		times.push(time);
+
+		if (time > highest) {
+			highest = time;
+		}
+		if (time < lowest) {
+			lowest = time;
+		}
+	}
+
+	const average = times.reduce((prev, current) => {
+		return prev + current;
+	}, 0) / times.length;
+
+	resultDiv.innerHTML = `
+		<div>The prime calculation ran 10 times. There are <strong>${totalPrimes}</strong> primes.</div>
+		<div>Calculation average: ${average} ms.</div>
+		<div>Slowest calculation: ${highest} ms.</div>
+		<div>Fastest calculation: ${lowest} ms.</div>
+	`;
+
+}
