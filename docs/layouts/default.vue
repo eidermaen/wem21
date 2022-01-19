@@ -1,12 +1,12 @@
 <template>
   <div>
     <nav class="sticky top-0 py-2 bar">
-      <div class="flex items-center">
+      <div class="flex items-center text-gray-400">
         <nuxt-link to="/">
-          <img src="logo.png" class="w-10 h-10">
+          <img src="/logo.png" class="w-10 h-10">
         </nuxt-link>
 
-        <nuxt-link to="about" class="ml-10">
+        <nuxt-link to="/about" class="ml-10">
           About
         </nuxt-link>
       </div>
