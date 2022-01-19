@@ -1,19 +1,8 @@
 <template>
   <div>
-    <Title>
-      {{ exercise.id }}: {{ exercise.title }}
-    </Title>
-    <p class="mt-2">
-      {{ exercise.description }}
-    </p>
+    <ExerciseHeader :id="1" />
 
-    <hr class="mt-4">
-
-    <div class="mt-6">
-      <Title sub>
-        1.1. Fachliche Argumentation über Erfolgsprinzipien des WWW
-      </Title>
-
+    <Exercise title="1.1. Fachliche Argumentation über Erfolgsprinzipien des WWW">
       <Question>
         Mit welchen fachlichen Argumenten wurde das WWW-Proposal von TBL abgelehnt?
       </Question>
@@ -48,13 +37,9 @@
         einer Datenbank gespeichert werden und seine Korrektheit überprüft werden. Dies würde also eine zentrale
         Speicherung der Links notwendig machen -> Verlust der Dezentralität und Offenheit.
       </Answer>
-    </div>
+    </Exercise>
 
-    <div class="mt-6">
-      <Title sub>
-        1.2 HTTP
-      </Title>
-
+    <Exercise title="1.2 HTTP">
       <Question>
         Sie bekommen im Browser den HTTP Status Code 200. Was bedeutet das?
       </Question>
@@ -102,61 +87,39 @@
         OPTIONS request in einen GET request und wieder zurück wandeln, um das Caching der GET requests ausnutzen zu
         können.
       </Answer>
-    </div>
+    </Exercise>
 
-    <div class="mt-6">
-      <Title sub>
-        1.3. Wireframe with HTML and CSS: Tribute Page
-      </Title>
+    <Exercise title="1.3. Wireframe with HTML and CSS: Tribute Page">
+      <CustomLink to="/external/1/tribute.html" :nuxt="false" target="_blank">
+        Link zum Wireframe
+      </CustomLink>
+    </Exercise>
 
-      <div class="mt-2">
-        <CustomLink to="/external/tribute.html" :nuxt="false" target="_blank">
-          Link zum Wireframe
-        </CustomLink>
-      </div>
-    </div>
+    <Exercise title="1.4. Wireframe with HTML and CSS (Survey Form)">
+      <CustomLink to="/external/1/survey.html" :nuxt="false" target="_blank">
+        Link zum Wireframe
+      </CustomLink>
+    </Exercise>
 
-    <div class="mt-6">
-      <Title sub>
-        1.4. Wireframe with HTML and CSS (Survey Form)
-      </Title>
-
-      <div class="mt-2">
-        <CustomLink to="/external/survey.html" :nuxt="false" target="_blank">
-          Link zum Wireframe
-        </CustomLink>
-      </div>
-    </div>
-
-    <div class="mt-6">
-      <Title sub>
-        1.5. Wireframe with HTML and CSS (Product Landing Page)
-      </Title>
-
-      <div class="mt-2">
-        <CustomLink to="/external/landing.html" :nuxt="false" target="_blank">
-          Link zum Wireframe
-        </CustomLink>
-      </div>
-    </div>
+    <Exercise title="1.5. Wireframe with HTML and CSS (Product Landing Page)">
+      <CustomLink to="/external/1/landing.html" :nuxt="false" target="_blank">
+        Link zum Wireframe
+      </CustomLink>
+    </Exercise>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import Title from '~/components/Title.vue';
-import exercises from '~/data/exercises';
 import Question from '~/components/Question.vue';
 import Answer from '~/components/Answer.vue';
 import Button from '~/components/Button.vue';
+import ExerciseHeader from '~/components/ExerciseHeader.vue';
+import ExerciseWrapper from '~/components/ExerciseWrapper.vue';
+import Exercise from '~/components/Exercise.vue';
 
 export default Vue.extend({
-  components: {Button, Answer, Question, Title},
-
-  asyncData(): Promise<object | void> | object | void {
-    return {
-      exercise: exercises.find(ex => ex.id === 1)
-    }
-  }
+  components: {Exercise, ExerciseWrapper, ExerciseHeader, Button, Answer, Question, Title},
 });
 </script>

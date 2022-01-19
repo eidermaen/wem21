@@ -24,6 +24,6 @@ export default Vue.extend({
 
 <style scoped>
 .style {
-  @apply cursor-pointer p-2 border rounded-lg border-green-700 bg-green-500 hover:bg-green-400 text-white transition-all duration-200;
+  @apply cursor-pointer my-1 p-2 border rounded-lg border-green-700 bg-green-500 hover:bg-green-400 text-white transition-all duration-200;
 }
 </style>

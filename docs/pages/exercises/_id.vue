@@ -10,6 +10,8 @@ import Title from '~/components/Title.vue';
 import Info from '~/components/Info.vue';
 
 export default Vue.extend({
+  layout: 'error',
+
   components: {Info, Title},
 });
 </script>
