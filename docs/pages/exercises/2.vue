@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <ExerciseHeader :id="2" />
-
+  <ExercisePage :exercise-id="2">
     <Exercise title="2.1. Responsiv mit Flexbox Desktop-First">
       <CustomLink :nuxt="false" target="_blank" to="/external/2/desktop-first.html">
         Link zum Wireframe
@@ -31,25 +29,18 @@
         Link zum Wireframe
       </CustomLink>
     </Exercise>
-  </div>
+  </ExercisePage>
 
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import exercises from '~/data/exercises';
+import {defineComponent} from '@nuxtjs/composition-api';
 import Title from '~/components/Title.vue';
-import ExerciseHeader from '~/components/ExerciseHeader.vue';
-import ExerciseWrapper from '~/components/ExerciseWrapper.vue';
 import CustomLink from '~/components/CustomLink.vue';
 import Exercise from '~/components/Exercise.vue';
+import ExercisePage from '~/components/ExercisePage.vue';
 
-export default Vue.extend({
-  components: {Exercise, CustomLink, ExerciseWrapper, ExerciseHeader, Title},
-  asyncData(): Promise<object | void> | object | void {
-    return {
-      exercise: exercises.find(ex => ex.id === 1)
-    }
-  }
+export default defineComponent({
+  components: {ExercisePage, Exercise, CustomLink, Title},
 });
 </script>

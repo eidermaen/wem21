@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <ExerciseHeader :id="3" />
-
+  <ExercisePage :exercise-id="3">
     <Exercise title="3.1: Funktionen in JavaScript">
       <Question>identify_function()</Question>
       <CodeSnippet>
@@ -202,20 +200,301 @@
       </CodeSnippet>
 
     </Exercise>
-  </div>
+
+    <Exercise title="3.2: Advanced Functional JavaScript Programming">
+
+      <Question>
+        Pub/sub object
+      </Question>
+
+      <CodeSnippet>
+        function pubsub() {
+          this.subs = [];
+          const that = this;
+          return {
+            subscribe(fn) {
+              that.subs.push(fn);
+            },
+            publish(value) {
+              that.subs.forEach(fn => {
+                fn(value);
+              });
+            }
+          }
+        }
+      </CodeSnippet>
+
+      <Question>
+        gensym()
+      </Question>
+
+      <CodeSnippet>
+        function gensymf(symbol) {
+          this.symbol = symbol;
+          this.counter = 0;
+
+          return () => {
+            const output = `${this.symbol}${this.counter}`;
+            this.counter++;
+            return output;
+          }
+        }
+      </CodeSnippet>
+
+      <Question>
+        fibonacci()
+      </Question>
+
+      <CodeSnippet>
+        function fibonacci(first, second) {
+          this.first = first;
+          this.second = second;
+          this.firstReturned = false;
+          this.secondReturned = false;
+
+          return () => {
+            if (!this.firstReturned) {
+              this.firstReturned = true;
+              return this.first;
+            } else if (!this.secondReturned) {
+              this.secondReturned = true;
+              return this.second;
+            } else {
+              const result = this.first + this.second;
+              this.first = this.second;
+              this.second = result;
+              return result;
+            }
+          }
+        }
+      </CodeSnippet>
+
+      <Question>
+        addg()
+      </Question>
+
+      <CodeSnippet>
+        function addg(value) {
+          function fn(next) {
+            if (!next) return value;
+
+            value += next;
+            return fn;
+          }
+
+          return fn;
+        }
+      </CodeSnippet>
+
+      <Question>
+        applyg()
+      </Question>
+
+      <CodeSnippet>
+        function applyg(fn) {
+          let store = 0;
+          return function (first) {
+            store = first;
+            function cb(second) {
+              if (second) {
+                store = fn(store, second);
+                return cb;
+              } else {
+                return store;
+              }
+            }
+            return cb;
+          }
+        }
+      </CodeSnippet>
+
+      <Question>
+        m()
+      </Question>
+
+      <CodeSnippet>
+        function m(value, source) {
+          return {
+            value,
+            source: source || String(value)
+          };
+        }
+      </CodeSnippet>
+
+      <Question>
+        addm()
+      </Question>
+
+      <CodeSnippet>
+        function addm(first, second) {
+          return {
+            value: first.value + second.value,
+            source: `(${first.value}+${second.value})`
+          };
+        }
+      </CodeSnippet>
+
+      <Question>
+        binarymf()
+      </Question>
+
+      <CodeSnippet>
+        function binarymf(fn, sign) {
+          return (first, second) => {
+            return {
+              value: fn(first.value, second.value),
+              source: `(${first.value}${sign}${second.value})`
+            }
+          }
+        }
+      </CodeSnippet>
+
+      <Question>
+        binarymf2()
+      </Question>
+
+      <CodeSnippet>
+        function binarymf2(fn, sign) {
+          return (first, second) => {
+            let firstRaw, secondRaw;
+            if (typeof first === 'object' && first.hasOwnProperty('value')) {
+              firstRaw = first.value;
+            } else {
+              firstRaw = first;
+            }
+
+            if (typeof second === 'object' && second.hasOwnProperty('value')) {
+              secondRaw = second.value;
+            } else {
+              secondRaw = second;
+            }
+
+            return {
+              value: fn(firstRaw, secondRaw),
+              source: `(${firstRaw}${sign}${secondRaw})`
+            }
+          }
+        }
+      </CodeSnippet>
+
+      <Question>
+        unarymf()
+      </Question>
+
+      <CodeSnippet>
+        function unarymf(fn, sign) {
+          return (value) => {
+            return {
+              value: fn(value),
+              source: `(${sign} ${value})`
+            }
+          }
+        }
+      </CodeSnippet>
+
+      <Question>
+        hyp()
+      </Question>
+
+      <CodeSnippet>
+        function hyp(a, b) {
+          return Math.sqrt(a*a + b*b);
+        }
+      </CodeSnippet>
+
+      <Question>
+        exp()
+      </Question>
+
+      <CodeSnippet>
+        function exp(array) {
+          const fn = array[0];
+          const first = array[1];
+          const second = array[2];
+
+          let firstRaw, secondRaw;
+
+          if (typeof first === 'number') {
+            firstRaw = first;
+          } else if (typeof first === 'object' && first.length) {
+            firstRaw = exp(first);
+          }
+
+          if (second) {
+            if (typeof second === 'number') {
+              secondRaw = second;
+            } else if (typeof second === 'object' && second.length) {
+              secondRaw = exp(second);
+            }
+          }
+
+          if (secondRaw) {
+            return fn(firstRaw, secondRaw);
+          } else {
+            return fn(firstRaw);
+          }
+        }
+      </CodeSnippet>
+
+      <Question>
+        store()
+      </Question>
+
+      <CodeSnippet>
+        var variable;
+        function store(value) {
+          variable = value;
+        }
+      </CodeSnippet>
+
+      <Question>
+        quatre()
+      </Question>
+
+      <CodeSnippet>
+        function quatre(bin, first, second, cb) {
+          cb(bin(first, second));
+        }
+      </CodeSnippet>
+
+      <Question>
+        unaryc()
+      </Question>
+
+      <CodeSnippet>
+        function unaryc(fn) {
+          return function(value, cb) {
+            cb(fn(value));
+          }
+        }
+      </CodeSnippet>
+
+      <Question>
+        binaryc()
+      </Question>
+
+      <CodeSnippet>
+        function binaryc(binary) {
+          return function (first, second, cb) {
+            cb(binary(first, second));
+          }
+        }
+      </CodeSnippet>
+
+    </Exercise>
+  </ExercisePage>
 
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import ExerciseHeader from '~/components/ExerciseHeader.vue';
-import ExerciseWrapper from '~/components/ExerciseWrapper.vue';
+import {defineComponent} from '@nuxtjs/composition-api';
 import Exercise from '~/components/Exercise.vue';
 import CodeSnippet from '~/components/CodeSnippet.vue';
 import Answer from '~/components/Answer.vue';
 import Question from '~/components/Question.vue';
+import ExercisePage from '~/components/ExercisePage.vue';
 
-export default Vue.extend({
-  components: {Question, Answer, CodeSnippet, Exercise, ExerciseWrapper, ExerciseHeader}
+export default defineComponent({
+  components: {ExercisePage, Question, Answer, CodeSnippet, Exercise}
 });
 </script>

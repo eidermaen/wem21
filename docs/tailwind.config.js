@@ -12,11 +12,23 @@ module.exports = {
             opacity: 1,
           },
         },
+        flyleft: {
+          '0%': {
+            transform: 'translateX(-2rem)',
+            opacity: 0,
+          },
+          '100%': {
+            transform: 'translateX(0)',
+            opacity: 1,
+          },
+        },
       },
 
       animation: {
         'flyin': 'flyin .5s ease-out',
-        'flyindelay': 'flyin .5s .5s ease-out forwards'
+        'flyindelay': 'flyin .5s .5s ease-out forwards',
+        'flyleft': 'flyleft .5s ease-out forwards',
+        'flyleftdelay': 'flyleft .5s .5s ease-out forwards',
       }
     }
   }

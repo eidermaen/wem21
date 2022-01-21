@@ -1,6 +1,6 @@
 const CACHE_NAME = 'WEM_JITTER2S_PWA';
 const URLS_TO_CACHE = [
-	'./index.html',
+	'./einkaufsliste.html',
 	'./js/*',
 	'./css/*',
 	'./favicon.ico'

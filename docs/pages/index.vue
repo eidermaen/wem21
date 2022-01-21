@@ -9,7 +9,7 @@
       <div class="mt-6 ">
         <h2 class="text-3xl">Aufgaben</h2>
 
-        <div class="mt-2 grid grid-cols-3 gap-2">
+        <div class="mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-2">
           <nuxt-link v-for="ex in data" :key="ex.id" :to="`exercises/${ex.id}`">
             <Card :title="`${ex.id}: ${ex.title}`">
               {{ ex.description }}

@@ -1,8 +1,14 @@
 <template>
   <div class="border rounded p-5" :class="style">
-    <h3 class="text-2xl font-bold">
-      {{ title }}
-    </h3>
+    <div class="flex flex-row items-center">
+      <div class="mr-2">
+        <InfoIcon v-if="variant === 'info'" :class="iconStyle" />
+        <ErrorIcon v-else-if="variant === 'danger'" :class="iconStyle" />
+      </div>
+      <h3 class="text-2xl font-bold">
+        {{ title }}
+      </h3>
+    </div>
     <p class="mt-4">
       <slot></slot>
     </p>
@@ -10,9 +16,12 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent, computed } from '@nuxtjs/composition-api';
+import InfoIcon from '~/components/icons/InfoIcon.vue';
+import ErrorIcon from '~/components/icons/ErrorIcon.vue';
 
-export default Vue.extend({
+export default defineComponent({
+  components: {ErrorIcon, InfoIcon},
   props: {
     title: {
       type: String,
@@ -21,23 +30,33 @@ export default Vue.extend({
     variant: {
       type: String,
       required: true,
-      validator: function (val) {
+      validator: function (val: string) {
         return ['info', 'success', 'danger'].includes(val);
       }
     }
   },
 
-  computed: {
-    style() {
+  setup(props: any) {
+
+    let style = computed(() => {
       let style = '';
 
-      switch (this.variant) {
+      switch (props.variant) {
+        case 'info':
+          style = 'border-blue-600 bg-blue-300 text-blue-700';
+          break;
         case 'danger':
           style = 'border-red-600 bg-red-500 text-white';
+          break;
       }
 
       return style;
+    });
+
+    return {
+      iconStyle: 'h-6 w-6',
+      style,
     }
-  }
+  },
 });
 </script>

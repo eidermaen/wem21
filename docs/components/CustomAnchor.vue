@@ -1,7 +1,5 @@
 <template>
-  <a :href="$attrs.href" :target="$attrs.target">
-    <slot/>
-  </a>
+  <a :href="$attrs.href" :target="$attrs.target"><slot/></a>
 </template>
 
 <script lang="ts">

@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <ExerciseHeader :id="1" />
-
+  <ExercisePage :exercise-id="1">
     <Exercise title="1.1. Fachliche Argumentation über Erfolgsprinzipien des WWW">
       <Question>
         Mit welchen fachlichen Argumenten wurde das WWW-Proposal von TBL abgelehnt?
@@ -106,20 +104,19 @@
         Link zum Wireframe
       </CustomLink>
     </Exercise>
-  </div>
+  </ExercisePage>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@nuxtjs/composition-api';
 import Title from '~/components/Title.vue';
 import Question from '~/components/Question.vue';
 import Answer from '~/components/Answer.vue';
 import Button from '~/components/Button.vue';
-import ExerciseHeader from '~/components/ExerciseHeader.vue';
-import ExerciseWrapper from '~/components/ExerciseWrapper.vue';
 import Exercise from '~/components/Exercise.vue';
+import ExercisePage from '~/components/ExercisePage.vue';
 
-export default Vue.extend({
-  components: {Exercise, ExerciseWrapper, ExerciseHeader, Button, Answer, Question, Title},
+export default defineComponent({
+  components: {ExercisePage, Exercise, Button, Answer, Question, Title},
 });
 </script>

@@ -3,7 +3,7 @@
     <slot/>
   </nuxt-link>
 
-  <a v-else class="style" :target="$attrs.target" :href="$attrs.to">
+  <a v-else class="style" :target="$attrs.target || '_self'" :href="$attrs.to">
     <slot/>
   </a>
 </template>

@@ -5,13 +5,18 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from '@nuxtjs/composition-api';
 import Title from '~/components/Title.vue';
 import Info from '~/components/Info.vue';
+import getTitle from '~/utils/getTitle';
 
-export default Vue.extend({
-  layout: 'error',
+export default defineComponent({
+  layout: 'custom-error',
 
   components: {Info, Title},
+
+  head: {
+    title: getTitle('Fehler'),
+  }
 });
 </script>

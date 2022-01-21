@@ -32,6 +32,31 @@
         handelt es sich um ein CSS-Framework mit Utility-Klassen, um das Styling mit CSS zu vereinfachen.
       </p>
 
+      <p>
+        Außerdem finden die folgenden (NuxtJS-)Module Anwendung:
+      </p>
+
+      <ul class="list-disc list-inside mb-4">
+        <li>
+          <CustomAnchor href="https://composition-api.nuxtjs.org" target="_blank">Nuxt Composition-API</CustomAnchor>
+        </li>
+        <li>
+          <CustomAnchor href="https://clipboardjs.com/" target="_blank">clipboard</CustomAnchor>
+          zum Kopieren von Code-Snippets
+        </li>
+        <li>
+          <CustomAnchor href="https://prismjs.com/" target="_blank">prismjs</CustomAnchor>
+          zur Formatierung von Code-Snippets
+        </li>
+        <li>
+          <CustomAnchor href="https://typescript.nuxtjs.org/" target="_blank">Nuxt Typescript</CustomAnchor>
+        </li>
+        <li>
+          <CustomAnchor href="https://storybook.nuxtjs.org/" target="_blank">Nuxt Storybook</CustomAnchor>
+          für die einfachere Integration von Storybook
+        </li>
+      </ul>
+
       <Title sub>
         Deployment/ Hosting
       </Title>
@@ -47,11 +72,16 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@nuxtjs/composition-api';
 import CustomAnchor from '~/components/CustomAnchor.vue';
+import getTitle from '~/utils/getTitle';
 
-export default Vue.extend({
-  components: {CustomAnchor}
+export default defineComponent({
+  components: {CustomAnchor},
+
+  head: {
+    title: getTitle('About'),
+  },
 });
 </script>
 

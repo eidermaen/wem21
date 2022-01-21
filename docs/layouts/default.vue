@@ -2,7 +2,7 @@
   <div>
     <transition name="fade">
       <div v-show="showScrollToTop" @click.stop="scrollToTop"
-           class="fixed w-12 h-12 flex bottom-8 right-8 text-green-600 cursor-pointer">
+           class="fixed w-12 h-12 z-10 flex bottom-8 right-8 text-green-600 cursor-pointer">
         <span class="animate-ping absolute inline-flex h-full w-full bg-green-200 rounded-full opacity-75"></span>
         <span class="relative inline-flex justify-center items-center
         rounded-full w-12 h-12 bg-green-300 hover:bg-green-200 transition-all duration-200">
@@ -17,13 +17,17 @@
           <img src="/logo.png" class="w-10 h-10">
         </nuxt-link>
 
-        <nuxt-link to="/about" class="ml-10">
+        <nuxt-link to="/about" class="ml-6 menu-hover-item">
           About
+        </nuxt-link>
+
+        <nuxt-link to="/feedback" class="ml-1 menu-hover-item">
+          Feedback
         </nuxt-link>
       </div>
     </nav>
 
-    <div class="w-full md:w-2/3 mx-8 md:mx-auto my-6 min-h-screen">
+    <div class="w-full px-2 md:px-0 md:w-3/4 md:mx-auto xl:w-2/3 my-6 min-h-screen">
       <Nuxt />
     </div>
 
@@ -71,6 +75,10 @@ export default Vue.extend({
 <style scoped>
 .bar {
   @apply px-4 bg-blue-600 z-10;
+}
+
+.menu-hover-item {
+  @apply px-3 py-2 rounded hover:bg-gray-100 hover:text-gray-600 transition-all duration-500
 }
 
 /* https://vuejs.org/v2/guide/transitions.html */
