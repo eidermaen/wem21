@@ -1,5 +1,5 @@
 <template>
-    <Info variant="danger" title="Fehler">
+    <Info variant="danger" title="404 - Not found">
       Die Aufgabe konnte leider nicht gefunden werden. Bitte mit einer anderen ID versuchen.
     </Info>
 </template>
@@ -16,7 +16,7 @@ export default defineComponent({
   components: {Info, Title},
 
   head: {
-    title: getTitle('Fehler'),
+    title: getTitle('404'),
   }
 });
 </script>

@@ -13,6 +13,6 @@ export default Vue.extend({
 
 <style scoped>
 a {
-  @apply text-red-600 hover:underline;
+  @apply text-red-600 cursor-pointer hover:underline;
 }
 </style>

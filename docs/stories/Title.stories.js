@@ -6,6 +6,7 @@ export default {
   component: Title,
   argTypes: {
     sub: {
+      description: 'If true, h2 will be rendered, else h1.',
       control: {
         options: [false, true],
         type: 'radio'
@@ -21,8 +22,9 @@ export default {
   },
 };
 
-const Template = args => defineComponent({
+const Template = (args, {argTypes}) => defineComponent({
   components: { Title },
+  props: Object.keys(argTypes),
   setup: () => ({ args }),
   template: '<Title v-bind="$props">{{ args.default }}</Title>'
 });

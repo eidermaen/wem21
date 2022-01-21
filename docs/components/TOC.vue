@@ -77,7 +77,25 @@ export default defineComponent({
 
     onMounted(() => {
       root.$nextTick(() => {
-        const headings = document.querySelectorAll(props.depth);
+        let selector = '';
+        switch (props.depth) {
+          case 'h1':
+            selector = 'h1';
+            break;
+          case 'h2':
+            selector = 'h1, h2';
+            break;
+          case 'h3':
+            selector = 'h1, h2, h3';
+            break;
+          case 'h4':
+            selector = 'h1, h2, h3, h4';
+            break;
+          case 'h5':
+            selector = 'h1, h2, h3, h4, h5';
+            break;
+        }
+        const headings = document.querySelectorAll(selector);
         headings.forEach(h => {
           headers.value.push({
             label: h.innerText,

@@ -24,6 +24,10 @@
         <nuxt-link to="/feedback" class="ml-1 menu-hover-item">
           Feedback
         </nuxt-link>
+
+        <a href="/storybook" class="ml-1 menu-hover-item">
+          Storybook
+        </a>
       </div>
     </nav>
 

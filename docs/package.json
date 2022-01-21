@@ -6,7 +6,10 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "storybook": "nuxt storybook",
+    "storybook:build": "nuxt storybook build -o ./dist/storybook",
+    "deploy": "yarn generate && yarn storybook:build"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
