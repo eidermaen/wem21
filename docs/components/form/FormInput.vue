@@ -1,7 +1,7 @@
 <template>
-  <BaseInput v-bind="$props">
-    <input :type="$attrs.type" :id="id" :name="name" :required="required" :placeholder="$attrs.placeholder"
-           class="form-input"
+  <BaseInput :id="id" :label="label" :required="required">
+    <input :value="value" :type="$attrs.type" :id="id" :name="name" :required="required" :placeholder="$attrs.placeholder"
+           class="form-input" @input="$emit('input', $event.target.value)"
     >
     <div class="text-gray-400 text-sm pl-1" v-if="description">
       {{ description }}
@@ -16,7 +16,13 @@ import BaseInput from '~/components/form/BaseInput.vue';
 export default defineComponent({
   name: 'FormInput',
   components: {BaseInput},
+  emits: ['update:modelValue'],
+
   props: {
+    value: {
+      type: [String, Number, Boolean, Object],
+      default: '',
+    },
     id: {
       type: String,
       required: true

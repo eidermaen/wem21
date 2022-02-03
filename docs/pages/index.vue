@@ -23,18 +23,25 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import {defineComponent, ref} from '@nuxtjs/composition-api';
 import Card from '~/components/Card.vue';
 import FlyDelay from '~/components/animations/FlyDelay.vue';
 import exercises from '~/data/exercises';
 
-export default Vue.extend({
-  name: 'IndexPage',
+export default defineComponent({
   components: {FlyDelay, Card},
 
   asyncData(): Promise<object | void> | object | void {
     return {
       data: exercises
+    }
+  },
+
+  setup() {
+    const isModalOpen = ref(true);
+
+    return {
+      isModalOpen
     }
   }
 })

@@ -95,8 +95,8 @@ export default defineComponent({
             selector = 'h1, h2, h3, h4, h5';
             break;
         }
-        const headings = document.querySelectorAll(selector);
-        headings.forEach(h => {
+        const headings: any = document.querySelectorAll(selector);
+        headings.forEach((h: any) => {
           headers.value.push({
             label: h.innerText,
             id: h.id

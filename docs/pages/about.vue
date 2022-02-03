@@ -23,12 +23,14 @@
         Für das Frontend kommt
         <CustomAnchor href="https://nuxtjs.org" target="_blank">NuxtJS</CustomAnchor>
         zum Einsatz.
-        Da NuxtJS out-of-the-box Static Site Generation unterstützt, kann die Seite sehr schnell deployed werden.
+        Da NuxtJS out-of-the-box <strong>Static Site Generation</strong> unterstützt, kann die Seite sehr schnell
+        deployed werden.
       </p>
 
       <p>
         Weiterhin wird für das Styling
-        <CustomAnchor target="_blank" href="https://tailwindcss.com">TailwindCSS</CustomAnchor> verwendet. Dabei
+        <CustomAnchor target="_blank" href="https://tailwindcss.com">TailwindCSS</CustomAnchor>
+        verwendet. Dabei
         handelt es sich um ein CSS-Framework mit Utility-Klassen, um das Styling mit CSS zu vereinfachen.
       </p>
 
@@ -57,15 +59,24 @@
         </li>
       </ul>
 
+      <p>
+        Auf der Seite werden Icons verwendet. Diese stammen von
+        <CustomAnchor target="_blank" href="https://heroicons.com/">Heroicons</CustomAnchor>.
+        Weiterhin wurden zwei Schriftarten verwendet:
+        <CustomAnchor target="_blank" href="https://fonts.google.com/specimen/Kameron">Kameron</CustomAnchor> und
+        <CustomAnchor target="_blank" href="https://fonts.google.com/specimen/Montserrat">Montserrat</CustomAnchor>.
+      </p>
+
       <Title sub>
         Deployment/ Hosting
       </Title>
 
       <p>
-        Das Deployment der Seite passiert über
+        Das Deployment der Seite geschieht über
         <CustomAnchor target="_blank" href="https://netlify.com">Netlify</CustomAnchor>.
-        Netlify hat dabei eine Verbindung zum Git-Repository, in dem der Code für die Seite liegt und macht jedes Mal
-        ein Rebuild, wenn auf einen bestimmten Branch Änderungen committed werden.
+        Netlify hat dabei eine Verbindung zum Git-Repository, in dem der Code für die Seite liegt.
+        Jedes Mal, wenn auf den <strong>deployment</strong> Branch committed wird, wird ein Rebuild der Seite durch
+        Netlify getriggered und die Homepage im Netlify-CDN neu deployed.
       </p>
     </div>
   </div>

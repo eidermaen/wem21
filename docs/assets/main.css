@@ -1,3 +1,21 @@
+@font-face {
+  font-family: font-body;
+  src: url(Kameron-Regular.ttf);
+}
+
+@font-face {
+  font-family: font-heading;
+  src: url(Montserrat-Medium.ttf);
+}
+
+* {
+  font-family: font-body;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: font-heading;
+}
+
 .page-enter-active,
 .page-leave-active {
   transition: opacity 0.5s;

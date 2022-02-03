@@ -1,16 +1,17 @@
 <template>
-  <form class="mt-4" :netlify="netlify" :name="name" :method="method" :action="action" :data-netlify-honeypot="netlify && 'bot-field'">
+  <form @submit="onSubmit" class="mt-4" :netlify="netlify" :name="name" :method="method" :action="action"
+        :data-netlify-honeypot="netlify && 'bot-field'">
     <div class="bot" v-if="netlify">
-      <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+      <label>Don’t fill this out if you’re human: <input name="bot-field"/></label>
     </div>
-    <input v-if="netlify" type="hidden" name="form-name" :value="name" />
+    <input v-if="netlify" type="hidden" name="form-name" :value="name"/>
 
-    <slot />
+    <slot/>
   </form>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
+import {defineComponent} from '@nuxtjs/composition-api';
 
 export default defineComponent({
   props: {
@@ -29,6 +30,12 @@ export default defineComponent({
     netlify: {
       type: Boolean,
       default: true
+    }
+  },
+
+  methods: {
+    onSubmit(e: Event) {
+      this.$emit('submit', e);
     }
   }
 });

@@ -15,12 +15,12 @@
         <FormInput label="E-Mail Adresse" name="email" id="email" required type="email"
                    placeholder="mika@muster.de"/>
 
-        <FormTextArea label="Deine Nachricht" name="message" id="message" required />
+        <FormTextArea label="Nachricht" name="message" id="message" required />
 
         <Button class="flex flex-row items-center">
           <Paperplane class="w-5 h-5 rotate"/>
           <div class="ml-1">
-            Abschicken!
+            Absenden!
           </div>
         </Button>
       </BaseForm>

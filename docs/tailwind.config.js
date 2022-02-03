@@ -1,6 +1,9 @@
 module.exports = {
   theme: {
     extend: {
+      borderWidth: {
+        '3': '3px',
+      },
       keyframes: {
         flyin: {
           '0%': {
