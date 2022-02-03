@@ -33,6 +33,7 @@
     </Exercise>
 
     <Exercise title="4.4 HTML-Editor">
+      <HtmlEditor />
     </Exercise>
   </ExercisePage>
 
@@ -47,8 +48,9 @@ import CustomAnchor from '~/components/CustomAnchor.vue';
 import Einkaufsliste from '~/components/exercises/Einkaufsliste.vue';
 import Rednerliste from '~/components/exercises/Rednerliste.vue';
 import Tabellenkalkulation from '~/components/exercises/Tabellenkalkulation.vue';
+import HtmlEditor from '~/components/exercises/HtmlEditor.vue';
 
 export default defineComponent({
-  components: {Tabellenkalkulation, Rednerliste, Einkaufsliste, CustomAnchor, ExercisePage, Info, Exercise},
+  components: {HtmlEditor, Tabellenkalkulation, Rednerliste, Einkaufsliste, CustomAnchor, ExercisePage, Info, Exercise},
 });
 </script>
