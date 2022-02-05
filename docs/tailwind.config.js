@@ -1,6 +1,10 @@
 module.exports = {
   theme: {
     extend: {
+      letterSpacing: {
+        widest: '.4em',
+      },
+
       borderWidth: {
         '3': '3px',
       },

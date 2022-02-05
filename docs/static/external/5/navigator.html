@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>WWW-Navigator</title>
+  <style>
+    .container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: grid;
+      grid-template-columns: 2fr 4fr 2fr;
+      grid-template-rows: auto 1fr auto;
+      overflow: hidden;
+      border-radius: 1rem;
+      margin: .5rem;
+    }
+    .top {
+      grid-column: 1 / span 8;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      background-color: #26C485;
+      color: white;
+    }
+    #navbar-links {
+      width: 50%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .left {
+      background-color: #E63946;
+      padding: 1rem;
+    }
+    #left-sidebar {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      height: 50%;
+    }
+    .content {
+      background-color: #7F828B;
+      padding: 1rem;
+      overflow-y: scroll;
+      color: white;
+    }
+    .right {
+      background-color: #E63946;
+      padding: 1rem;
+
+    }
+    .footer {
+      grid-column: 1 / span 8;
+      padding: .5rem;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: #457B9D;
+      color: white;
+    }
+    .footer a {
+      color: white
+    }
+
+    .btn {
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: .6rem;
+      background-color: orange;
+    }
+    .btn:hover {
+      cursor: pointer;
+    }
+    .btn-active {
+      background-color: lightseagreen;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="top">
+    <h1>WWW-Navigator</h1>
+    <div id="navbar-links">
+      Loading . . .
+    </div>
+  </div>
+  <div class="left">
+    <div id="left-sidebar">
+      Loading . . .
+    </div>
+  </div>
+  <div class="content" id="content">
+    Loading . . .
+  </div>
+  <div class="right" id="right-sidebar">
+    Loading . . .
+  </div>
+  <div class="footer">
+    <h2>Footer</h2>
+    <a href="#">Sitemap</a>
+    <a href="#">Home</a>
+    <a href="#">News</a>
+    <a href="#">Contact</a>
+    <a href="#">About</a>
+  </div>
+</div>
+
+<script>
+  const URL = 'https://www2.inf.h-brs.de/~jitter2s/wem/navigator_contents.json';
+  const topNavBar = document.getElementById('navbar-links');
+  const leftSidebar = document.getElementById('left-sidebar');
+  const rightSidebar = document.getElementById('right-sidebar');
+  const contentDiv = document.getElementById('content');
+
+  const topButtons = [];
+
+  const generateButton = (title, index) => {
+    const btn = document.createElement('button');
+    btn.className = 'btn';
+    if (index === 0) {
+      btn.classList.add('btn-active');
+    }
+    btn.innerText = title.toUpperCase();
+    return btn;
+  }
+
+  fetch(URL)
+    .then(result => result.json())
+    .then(data => {
+      topNavBar.innerText = '';
+
+      Object.keys(data).forEach((topKey, topIndex) => {
+        const btn = generateButton(topKey, topIndex);
+        topButtons.push(btn);
+        topNavBar.appendChild(btn);
+
+        const sideBarButtons = [];
+
+        btn.onclick = () => {
+          topButtons.forEach(b => b.classList.remove('btn-active'));
+          btn.classList.add('btn-active');
+          leftSidebar.innerText = '';
+          Object.keys(data[topKey]).forEach((leftKey, leftIndex) => {
+            const leftBtn = generateButton(leftKey, leftIndex);
+            sideBarButtons.push(leftBtn);
+            leftSidebar.appendChild(leftBtn);
+
+            leftBtn.onclick = () => {
+              rightSidebar.innerText = '';
+              sideBarButtons.forEach(b => b.classList.remove('btn-active'));
+              leftBtn.classList.add('btn-active');
+              const content = data[topKey][leftKey].content;
+              contentDiv.innerText = content;
+
+              data[topKey][leftKey].references.forEach(r => {
+                const div = document.createElement('div');
+                const a = document.createElement('a');
+                a.href = r;
+                a.target = '_blank';
+                a.innerText = r;
+                div.appendChild(a);
+                rightSidebar.appendChild(div);
+              });
+            }
+
+            if (leftIndex === 0) {
+              leftBtn.click();
+            }
+          });
+        }
+
+        if (topIndex === 0) {
+          btn.click();
+        }
+      });
+    });
+</script>
+</body>
+</html>
