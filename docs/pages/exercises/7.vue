@@ -1,0 +1,328 @@
+<template>
+  <ExercisePage :exercise-id="7">
+    <Exercise title="7.1 File Generatoren">
+      <Question>
+        Implementierung number_file_gen.js
+      </Question>
+      <CodeSnippet lang="js">
+        import * as fs from 'fs';
+        const input = process.argv[2];
+
+        if (!input) {
+          console.error('Please enter a number!');
+        } else {
+          const length = parseInt(input.replace('_', ''));
+          let outputString = '';
+
+          for (let i = 0; i < length; i++) {
+            outputString += `${i}.\n`;
+          }
+
+          fs.writeFile('output.txt', outputString, err => {
+            if (err) {
+              console.error('Error while trying to create file', err);
+            } else {
+              console.log('File has been created successfully!');
+            }
+          });
+        }
+      </CodeSnippet>
+
+      <Question>
+        Implementierung alpha_file_gen.js
+      </Question>
+      <CodeSnippet lang="js">
+        import * as fs from 'fs';
+        const input = process.argv[2];
+
+        if (!input) {
+          console.error('Please enter a number!');
+        } else {
+          const length = parseInt(input.replace('_', ''));
+          let outputString = '';
+
+
+          for (let i = 0; i < length; i++) {
+            const lineContent = getCharacter(i);
+            outputString += `${lineContent}\n`;
+          }
+
+          fs.writeFile('output.txt', outputString, err => {
+            if (err) {
+              console.error('Error while trying to create file', err);
+            } else {
+              console.log('File has been created successfully!');
+            }
+          });
+        }
+
+        function getCharacter(i) {
+          const diff = Math.floor(i / 26);
+          if (diff === 0) {
+            return String.fromCharCode((i + 65)).toUpperCase();
+          }
+
+          const output = [];
+          const rest = i % 26;
+          let tmp = getCharacter(div - 1);
+          tmp += getCharacter(rest);
+          output.push(tmp);
+
+          return output.join('');
+        }
+      </CodeSnippet>
+    </Exercise>
+
+    <Exercise title="7.2 Performance Merge">
+      <Question>
+        Implementierung merge_files.js
+      </Question>
+      <CodeSnippet lang="js">
+        import * as fs from 'fs';
+        import * as util from 'util';
+
+        const readFile = util.promisify(fs.readFile);
+
+        const firstFile = process.argv[2];
+        const secondFile = process.argv[3];
+
+
+        (async _ => {
+          if (!firstFile || !secondFile) {
+            console.error('Please provide 2 file names!');
+          } else {
+            let output = [[],[]];
+
+            console.time('MERGE');
+
+            const fileOne = await readFile(firstFile, 'utf8');
+            const fileTwo = await readFile(secondFile, 'utf8');
+
+            output[0].push(...fileOne.split('\n'));
+            output[1].push(...fileTwo.split('\n'));
+
+            const outputFile = 'output.txt';
+            let outputString = '';
+            const lengthA = output[0].length;
+            const lengthB = output[1].length;
+            const max = lengthA > lengthB ? lengthA : lengthB;
+
+            for (let i = 0; i < max; i++) {
+              let first = output[0][i] || '';
+              let second = output[1][i] || '';
+
+              outputString += `${first} ${second} \n`;
+            }
+
+            console.timeEnd('MERGE');
+
+            fs.writeFile(outputFile, outputString, err => {
+              if (err) {
+                console.error(err);
+              } else {
+                console.log('Files merged! Check "output.txt".')
+              }
+            });
+          }
+        })();
+      </CodeSnippet>
+
+      <Question>
+        Implementierung merge_streams.js
+      </Question>
+
+      <CodeSnippet lang="js">
+        import * as fs from 'fs';
+        import * as stream from 'stream';
+        import * as util from 'util';
+
+        const pipeline = util.promisify(stream.pipeline);
+
+        const firstFile = process.argv[2];
+        const secondFile = process.argv[3];
+
+        (async _ => {
+          if (!firstFile || !secondFile) {
+            console.error('Please provide 2 file names!');
+          } else {
+            let output = [[],[]];
+
+            console.time('MERGE');
+
+            await pipeline(
+              fs.createReadStream(firstFile, 'utf8'),
+              async data => {
+                for await (const chunk of data) {
+                  const split = chunk.split('\n');
+                  output[0].push(...split);
+                }
+              }
+            );
+
+            await pipeline(
+              fs.createReadStream(secondFile, 'utf8'),
+              async data => {
+                for await (const chunk of data) {
+                  const split = chunk.split('\n');
+                  output[1].push(...split);
+                }
+              }
+            );
+
+            const outputFile = 'output.txt';
+            let outputString = '';
+            const lengthA = output[0].length;
+            const lengthB = output[1].length;
+            const max = lengthA > lengthB ? lengthA : lengthB;
+
+            for (let i = 0; i < max; i++) {
+              let first = output[0][i] || '';
+              let second = output[1][i] || '';
+
+              outputString += `${first} ${second} \n`;
+            }
+
+            console.timeEnd('MERGE');
+
+            fs.writeFile(outputFile, outputString, err => {
+              if (err) {
+                console.error(err);
+              } else {
+                console.log('Files merged! Check "output.txt".')
+              }
+            });
+          }
+        })()
+      </CodeSnippet>
+
+      <Question>
+        Ergebnisse Performance-Messung
+      </Question>
+
+      <Answer>
+        <div>
+          Merge files: ca. 2-4ms
+        </div>
+        <div>
+          Merge stream: ca. 6-9ms
+        </div>
+      </Answer>
+    </Exercise>
+
+    <Exercise title="7.3 Express.js Server">
+      <CodeSnippet lang="js">
+        const express = require('express');
+        const app = express();
+        const bodyParser = require('body-parser');
+        const multer = require('multer');
+        const fs = require('fs');
+        const path = require('path');
+        const util = require('util');
+        const promisify = util.promisify;
+
+        const readFile = promisify(fs.readFile);
+        const writeFile = promisify(fs.writeFile);
+
+        const { customAlphabet } = require('nanoid');
+        const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz1234567890', 10);
+
+        const upload = multer({
+          storage: multer.memoryStorage()
+        });
+
+        const filesUpload = upload.fields([
+          {name: 'first', maxCount: 1},
+          {name: 'second', maxCount: 1}
+        ]);
+
+        app.set('view engine', 'hbs');
+
+        app.use(bodyParser.json());
+        app.use(bodyParser.urlencoded({
+          extended: true
+        }));
+        app.use(express.json());
+
+        app.get('/', (req, res) => {
+          res.render('index');
+        });
+
+        app.get('/download', (req, res) => {
+          const id = req.query.id;
+
+          if (!id) {
+            return res.redirect('/');
+          }
+          res.render('download', { id });
+        });
+
+        app.post('/rest/merge', filesUpload, async (req, res, next) => {
+          const file1 = req.files.first[0].buffer.toString();
+          const file2 = req.files.second[0].buffer.toString();
+
+          const output = mergeFiles(file1, file2);
+          const id = nanoid();
+
+          try {
+            await writeFile(`downloads/${id}.txt`, output);
+            return res.redirect(`/download?id=${id}`);
+          } catch (e) {
+            return next(e);
+          }
+
+        });
+
+        app.get('/rest/download/:id', async (req, res, next) => {
+          const id = req.params.id;
+          if (!id) {
+            return res.redirect('/');
+          }
+
+          res.download(path.join(__dirname, `downloads/${id}.txt`), 'merge.txt');
+
+          fs.unlink(`downloads/${id}.txt`, () => {});
+        });
+
+        app.use((err, req, res, next) => {
+          console.error('Error', err);
+        });
+
+        app.listen(3000, () => {
+          console.log('Servers started on port 3000.');
+        });
+
+        function mergeFiles(fileOne, fileTwo) {
+          const output = [[],[]];
+          output[0].push(...fileOne.split('\n'));
+          output[1].push(...fileTwo.split('\n'));
+
+          let outputString = '';
+          const lengthA = output[0].length;
+          const lengthB = output[1].length;
+          const max = lengthA > lengthB ? lengthA : lengthB;
+
+          for (let i = 0; i < max; i++) {
+            let first = output[0][i] || '';
+            let second = output[1][i] || '';
+
+            outputString += `${first} ${second} \n`;
+          }
+          return outputString;
+        }
+      </CodeSnippet>
+    </Exercise>
+  </ExercisePage>
+</template>
+
+<script lang="ts">
+import {defineComponent} from '@nuxtjs/composition-api';
+import Exercise from '~/components/Exercise.vue';
+import ExercisePage from '~/components/ExercisePage.vue';
+import CodeSnippet from '~/components/CodeSnippet.vue';
+import Question from '~/components/Question.vue';
+import Answer from '~/components/Answer.vue';
+
+export default defineComponent({
+  components: {Answer, Question, CodeSnippet, ExercisePage, Exercise}
+});
+</script>

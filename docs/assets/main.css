@@ -8,7 +8,7 @@
   src: url(Montserrat-Medium.ttf);
 }
 
-* {
+*:not(code span) {
   font-family: font-body;
 }
 
