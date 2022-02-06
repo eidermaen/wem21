@@ -1,6 +1,6 @@
 import {LitElement, html, css, unsafeCSS} from 'lit';
 
-export class MenuWrapper extends LitElement {
+class MenuWrapper extends LitElement {
 
   static properties = {
     vertical: {
@@ -49,7 +49,7 @@ export class MenuWrapper extends LitElement {
   }
 }
 
-export class MenuEntry extends LitElement {
+class MenuEntry extends LitElement {
 
   static properties = {
     id: {
@@ -97,3 +97,6 @@ export class MenuEntry extends LitElement {
     return this.active;
   }
 }
+
+customElements.define('menu-wrapper', MenuWrapper);
+customElements.define('menu-item', MenuEntry);

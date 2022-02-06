@@ -57,6 +57,10 @@
           <CustomAnchor href="https://storybook.nuxtjs.org/" target="_blank">Nuxt Storybook</CustomAnchor>
           für die einfachere Integration von Storybook
         </li>
+        <li>
+          <CustomAnchor href="https://pwa.nuxtjs.org/" target="_blank">PWA</CustomAnchor>
+          für die automatische Erstellung einer PWA
+        </li>
       </ul>
 
       <p>

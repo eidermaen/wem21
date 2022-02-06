@@ -26,6 +26,16 @@ export default {
   plugins: [
   ],
 
+  pwa: {
+    manifest: {
+      name: 'Jona Ittermann WEM',
+      short_name: 'WEM',
+      description: 'Hausarbeit WEM Wintersemester 2021 von Jona Ittermann',
+      lang: 'de',
+      useWebmanifestExtension: false
+    }
+  },
+
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
@@ -37,6 +47,8 @@ export default {
     '@nuxtjs/tailwindcss',
     // Composition API
     '@nuxtjs/composition-api/module',
+    //https://pwa.nuxtjs.org/
+    '@nuxtjs/pwa',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
