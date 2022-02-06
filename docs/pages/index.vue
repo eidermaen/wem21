@@ -5,6 +5,12 @@
       <p>Built with NuxtJS and TailwindCSS</p>
     </div>
 
+    <div class="my-8">
+      <Info title="Under development" variant="danger">
+        This page is still under development and not in a final state, yet. Content might and will change.
+      </Info>
+    </div>
+
     <FlyDelay>
       <div class="mt-6 ">
         <h2 class="text-3xl">Aufgaben</h2>
@@ -27,9 +33,10 @@ import {defineComponent, ref} from '@nuxtjs/composition-api';
 import Card from '~/components/Card.vue';
 import FlyDelay from '~/components/animations/FlyDelay.vue';
 import exercises from '~/data/exercises';
+import Info from '~/components/Info.vue';
 
 export default defineComponent({
-  components: {FlyDelay, Card},
+  components: {Info, FlyDelay, Card},
 
   asyncData(): Promise<object | void> | object | void {
     return {
