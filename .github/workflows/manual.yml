@@ -15,5 +15,6 @@ jobs:
         with:
           ref: deployment
       - run: |
+          git config pull.rebase false
           git pull origin master --no-edit
           git push
