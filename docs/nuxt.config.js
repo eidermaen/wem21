@@ -37,7 +37,10 @@ export default {
       description: 'Hausarbeit WEM Wintersemester 2021 von Jona Ittermann',
       lang: 'de',
       useWebmanifestExtension: false
-    }
+    },
+    workbox: {
+      pagesURLPattern: '/*',
+    },
   },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
