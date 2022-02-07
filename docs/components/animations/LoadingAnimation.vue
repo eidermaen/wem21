@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-gray-200 shadow rounded-md p-4 max-w-sm w-full">
+  <div class="border border-gray-200 shadow rounded-md p-4 w-3/4 lg:w-1/2 xl:w-1/3">
     <div class="animate-pulse flex space-x-4">
       <div class="flex-1 space-y-6 py-1">
         <div class="text-gray-400 tracking-widest text-md">Loading . . .</div>

@@ -7,7 +7,7 @@
     </div>
 
     <div class="mt-8">
-      <div v-if="!totalTime" class="w-1/2">
+      <div v-if="!totalTime">
         <LoadingAnimation />
       </div>
 
@@ -46,6 +46,8 @@ export default defineComponent({
     }
   },
 
+  fetchOnServer: false,
+
   async fetch() {
     const start = Date.now();
 
@@ -63,6 +65,8 @@ export default defineComponent({
 
     const one = await fileOne();
     const two = await fileTwo();
+
+    this.result = [...one];
 
     for (let i = 0; i < one.length; i++) {
       this.result[i] += two[i];

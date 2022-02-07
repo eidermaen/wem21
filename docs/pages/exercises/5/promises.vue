@@ -7,8 +7,8 @@
     </div>
 
     <div class="mt-8">
-      <div v-if="!totalTime" class="w-1/2">
-        <LoadingAnimation></LoadingAnimation>
+      <div v-if="!totalTime">
+        <LoadingAnimation />
       </div>
 
       <div v-else>
@@ -45,6 +45,8 @@ export default defineComponent({
       totalTime: undefined as number | undefined,
     }
   },
+
+  fetchOnServer: false,
 
   fetch() {
     const start = Date.now();
