@@ -29,6 +29,13 @@
         Die Daten, die letztendlich auf dem Server gespeichert werden, werden durch Netlify entsprechend gespeichert,
         sodass dort kein Ausführen von z.B. SQL-Ausdrücken möglich ist.
       </Answer>
+
+      <Question>CORS, XSS etc.</Question>
+      <Answer>
+        Da - abseits von dem Feedback-Form - keinerlei Nutzerinteraktion bzgl. Datenverarbeitung möglich ist, bedarf
+        es hier keinen zusätzlichen Sicherheitsmaßnahmen. Auch Nutzeridentifiaktionen, wie Cookies, werden nicht
+        verwendet und müssen somit nicht geschützt werden.
+      </Answer>
     </Exercise>
   </ExercisePage>
 </template>
