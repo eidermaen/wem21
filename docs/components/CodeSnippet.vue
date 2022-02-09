@@ -11,7 +11,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Prism from '~/plugins/prism';
+//@ts-ignore
+import Prism from 'prismjs';
 import 'clipboard';
 
 export default Vue.extend({

@@ -72,6 +72,28 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    babel: {
+      plugins: [
+        [
+          'prismjs',
+          {
+            'languages': ['javascript', 'css', 'go', 'sql'],
+            "plugins": [
+              "toolbar",
+              "line-numbers",
+              "autolinker",
+              "line-highlight",
+              "copy-to-clipboard",
+              "highlight-keywords",
+              "show-language",
+              "normalize-whitespace"
+            ],
+            "theme": "tomorrow",
+            "css": true
+          }
+        ]
+      ]
+    },
   },
 
   storybook: {
