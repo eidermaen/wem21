@@ -18,9 +18,9 @@
         </div>
 
         <div class="mt-12">
-          <slot name="footer">
+          <slot name="footer" :close="close" :ok="ok">
             <div class="text-center">
-              <Button @click="$emit('close')">Ok</Button>
+              <Button @click="close">Ok</Button>
             </div>
           </slot>
         </div>
@@ -36,7 +36,7 @@ import Button from '~/components/Button.vue';
 
 export default defineComponent({
   components: {Button, CrossIcon},
-  emits: ['close'],
+  emits: ['close', 'ok'],
 
   props: {
     open: {
@@ -44,6 +44,14 @@ export default defineComponent({
       default: false,
     },
   },
+  methods: {
+    close() {
+      this.$emit('close');
+    },
+    ok() {
+      this.$emit('ok');
+    },
+  }
 });
 </script>
 
