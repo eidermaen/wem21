@@ -1,5 +1,5 @@
 .toaster {
-  @apply z-full fixed top-10 right-10 p-4 rounded opacity-100 border shadow;
+  @apply z-full fixed top-10 right-10 p-4 rounded-lg opacity-100 border shadow;
   transform: translateX(0);
   transition: all 400ms;
   transition-timing-function: cubic-bezier(.18,.89,.32,1.28);
