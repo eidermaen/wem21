@@ -9,6 +9,10 @@ module.exports = {
         'full': '999',
       },
 
+      width: {
+        'fit': 'fit-content',
+      },
+
       borderWidth: {
         '3': '3px',
       },

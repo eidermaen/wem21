@@ -1,7 +1,7 @@
 <template>
   <transition name="modal">
     <div v-if="open" class="backdrop fixed inset-0 bg-gray-300 flex justify-center items-center z-50">
-      <div class="relative p-6 rounded-lg bg-white max-w-3/4 w-3/4">
+      <div class="relative p-6 rounded-lg bg-white w-7/8 md:max-w-3/4 md:w-3/4">
         <span class="absolute p-2 top-4 right-4 cursor-pointer" @click="$emit('close')">
           <CrossIcon class="w-4 h-4"/>
         </span>
