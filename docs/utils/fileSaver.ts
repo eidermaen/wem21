@@ -23,7 +23,7 @@ export type FileType = 'num' | 'alpha';
 
 export async function fetchData(type: FileType, count: number): Promise<string> {
   try {
-    const response = await fetch('/api/filegen', {
+    const response = await fetch('/.netlify/functions/filegen', {
       method: 'POST',
       body: JSON.stringify({
         type,
