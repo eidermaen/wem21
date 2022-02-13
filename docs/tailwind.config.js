@@ -5,6 +5,10 @@ module.exports = {
         widest: '.4em',
       },
 
+      zIndex: {
+        'full': '999',
+      },
+
       borderWidth: {
         '3': '3px',
       },

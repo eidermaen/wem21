@@ -1,0 +1,45 @@
+.toaster {
+  @apply z-full fixed top-10 right-10 p-4 rounded opacity-100 border shadow;
+  transform: translateX(0);
+  transition: all 400ms;
+  transition-timing-function: cubic-bezier(.18,.89,.32,1.28);
+  min-width: 300px;
+  min-height: 100px;
+}
+
+.toaster .container {
+  @apply relative w-full h-full;
+}
+
+.toaster-hide {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.toaster .close-icon {
+  @apply absolute top-0 right-1 cursor-pointer p-1;
+}
+
+.toaster-error {
+  @apply bg-red-400 border-red-600 text-red-900;
+}
+
+.toaster-success {
+  @apply bg-green-400 border-green-600 text-green-900;
+}
+
+.toaster-info {
+  @apply bg-blue-300 border-blue-600 text-blue-900;
+}
+
+.toaster-warning {
+  @apply bg-yellow-300 border-yellow-400 text-gray-600;
+}
+
+.toaster .title {
+  @apply text-xl mb-2 mr-8;
+}
+
+.toaster .content {
+  @apply mt-2 ml-1;
+}

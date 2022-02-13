@@ -6,7 +6,7 @@
       </Question>
       <div class="my-2">
         <Button @click="clickOpenModal('num')">
-          Click to generate file
+          Click to generate file ...
         </Button>
       </div>
       <CodeSnippet lang="js">
@@ -38,7 +38,7 @@
       </Question>
       <div class="my-2">
         <Button @click="clickOpenModal('alpha')">
-          Click to generate file
+          Click to generate file ...
         </Button>
       </div>
       <CodeSnippet lang="js">
@@ -342,7 +342,8 @@
       </template>
 
       <template #footer>
-        <span></span>
+        <hr>
+        <span class="text-sm text-gray-500">Running on Netlify Functions</span>
       </template>
     </Modal>
   </ExercisePage>
@@ -362,11 +363,13 @@ import BaseInput from '~/components/form/BaseInput.vue';
 import FormInput from '~/components/form/FormInput.vue';
 import {fetchData, FileType, saveFile} from '~/utils/fileSaver';
 import LoadingAnimation from '~/components/animations/LoadingAnimation.vue';
+import {ToastVariant} from '~/plugins/toast/Toast';
 
 export default defineComponent({
   components: {
     LoadingAnimation,
-    FormInput, BaseInput, BaseForm, Modal, Button, Answer, Question, CodeSnippet, ExercisePage, Exercise},
+    FormInput, BaseInput, BaseForm, Modal, Button, Answer, Question, CodeSnippet, ExercisePage, Exercise
+  },
 
   data() {
     return {
@@ -396,11 +399,12 @@ export default defineComponent({
         const count = this.count, type = this.selectedType;
 
         const data = await fetchData(type, count);
-        if (data) {
-          saveFile(data, 'download.txt', 'text/plain');
-        }
+        saveFile(data, 'download.txt', 'text/plain');
       } catch (e) {
-        console.log(e);
+        console.error(e);
+        this.$toaster('Fehler', `Fehler beim Erstellen der Datei: ${e.message}`, {
+          variant: ToastVariant.ERROR
+        }).show();
       } finally {
         this.clickCloseModal();
       }

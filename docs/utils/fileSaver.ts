@@ -21,7 +21,7 @@ export function saveFile(data: string, filename: string, type: string) {
 
 export type FileType = 'num' | 'alpha';
 
-export async function fetchData(type: FileType, count: number): Promise<string | null> {
+export async function fetchData(type: FileType, count: number): Promise<string> {
   try {
     const response = await fetch('/api/filegen', {
       method: 'POST',
@@ -33,6 +33,6 @@ export async function fetchData(type: FileType, count: number): Promise<string |
     const json = await response.json();
     return json.data;
   } catch (e) {
-    return null;
+    throw new Error('Unable to fetch data');
   }
 }
