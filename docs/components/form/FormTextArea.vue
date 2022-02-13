@@ -1,6 +1,7 @@
 <template>
   <BaseInput v-bind="$props">
-    <textarea :id="id" :name="name" :required="required" :rows="rows" class="form-input" />
+    <textarea :value="value" @input="$emit('input', $event.target.value)" :id="id"
+              :name="name" :required="required" :rows="rows" class="form-input" />
   </BaseInput>
 </template>
 <script>
@@ -32,6 +33,10 @@ export default {
     rows: {
       type: Number,
       default: 4
+    },
+    value: {
+      type: String,
+      default: ''
     },
   }
 }
