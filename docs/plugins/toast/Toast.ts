@@ -13,6 +13,12 @@ export interface ToastOptions {
   onClose?(): any;
 };
 
+interface ToastData {
+  [key: string]: HTMLElement
+}
+
+const CREATED_TOASTS: ToastData = {};
+
 export class Toast {
 
   private readonly id: string;
@@ -24,7 +30,7 @@ export class Toast {
 
   private constructor(title: string, message?: string, options?: ToastOptions) {
     // ID between 0 and 100
-    this.id = String(Math.floor(Math.random() * 101));
+    this.id = 'toast-' + String(Math.floor(Math.random() * 101));
     this.title = title;
     this.message = message;
 
@@ -43,11 +49,13 @@ export class Toast {
   }
 
   public show() {
+    CREATED_TOASTS[this.id] = this.elem;
     document.body.appendChild(this.elem);
 
     setTimeout(() => {
       this.elem.classList.toggle('toaster-hide');
-    }, 0);
+      this.shiftToasts();
+    }, 10);
 
     if (this.options.autoDestroy) {
       this.timeout = setTimeout(() => {
@@ -65,6 +73,7 @@ export class Toast {
 
     setTimeout(() => {
       document.body.removeChild(this.elem);
+      delete CREATED_TOASTS[this.id];
     }, 500);
   }
 
@@ -124,5 +133,19 @@ export class Toast {
     }
 
     elem.classList.add('toaster', 'toaster-hide', variantStyle);
+  }
+
+  private shiftToasts() {
+    const currentHeight = this.elem.offsetHeight;
+    const padding = 10;
+
+    for (let key in CREATED_TOASTS) {
+      if (key !== this.id) {
+        const el = CREATED_TOASTS[key];
+        const style = window.getComputedStyle(el);
+        const matrix = new DOMMatrixReadOnly(style.transform);
+        el.style.transform = `translateY(${matrix.m42 + currentHeight + padding}px)`;
+      }
+    }
   }
 }
