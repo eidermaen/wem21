@@ -14,22 +14,22 @@
         const input = process.argv[2];
 
         if (!input) {
-        console.error('Please enter a number!');
+          console.error('Please enter a number!');
         } else {
-        const length = parseInt(input.replace('_', ''));
-        let outputString = '';
+          const length = parseInt(input.replace('_', ''));
+          let outputString = '';
 
-        for (let i = 0; i < length; i++) {
-        outputString += `${i}.\n`;
-        }
+          for (let i = 0; i < length; i++) {
+            outputString += `${i}.\n`;
+          }
 
-        fs.writeFile('output.txt', outputString, err => {
-        if (err) {
-        console.error('Error while trying to create file', err);
-        } else {
-        console.log('File has been created successfully!');
-        }
-        });
+          fs.writeFile('output.txt', outputString, err => {
+            if (err) {
+              console.error('Error while trying to create file', err);
+            } else {
+              console.log('File has been created successfully!');
+            }
+          });
         }
       </CodeSnippet>
 
@@ -46,39 +46,39 @@
         const input = process.argv[2];
 
         if (!input) {
-        console.error('Please enter a number!');
+          console.error('Please enter a number!');
         } else {
-        const length = parseInt(input.replace('_', ''));
-        let outputString = '';
+          const length = parseInt(input.replace('_', ''));
+          let outputString = '';
 
 
-        for (let i = 0; i < length; i++) {
-        const lineContent = getCharacter(i);
-        outputString += `${lineContent}\n`;
-        }
+          for (let i = 0; i < length; i++) {
+            const lineContent = getCharacter(i);
+            outputString += `${lineContent}\n`;
+          }
 
-        fs.writeFile('output.txt', outputString, err => {
-        if (err) {
-        console.error('Error while trying to create file', err);
-        } else {
-        console.log('File has been created successfully!');
-        }
-        });
+          fs.writeFile('output.txt', outputString, err => {
+            if (err) {
+              console.error('Error while trying to create file', err);
+            } else {
+              console.log('File has been created successfully!');
+            }
+          });
         }
 
         function getCharacter(i) {
-        const diff = Math.floor(i / 26);
-        if (diff === 0) {
-        return String.fromCharCode((i + 65)).toUpperCase();
-        }
+          const diff = Math.floor(i / 26);
+          if (diff === 0) {
+            return String.fromCharCode((i + 65)).toUpperCase();
+          }
 
-        const output = [];
-        const rest = i % 26;
-        let tmp = getCharacter(div - 1);
-        tmp += getCharacter(rest);
-        output.push(tmp);
+          const output = [];
+          const rest = i % 26;
+          let tmp = getCharacter(div - 1);
+          tmp += getCharacter(rest);
+          output.push(tmp);
 
-        return output.join('');
+          return output.join('');
         }
       </CodeSnippet>
     </Exercise>
@@ -97,48 +97,45 @@
         import * as util from 'util';
 
         const readFile = util.promisify(fs.readFile);
-
         const firstFile = process.argv[2];
         const secondFile = process.argv[3];
 
-
         (async _ => {
-        if (!firstFile || !secondFile) {
-        console.error('Please provide 2 file names!');
-        } else {
-        let output = [[],[]];
+          if (!firstFile || !secondFile) {
+            console.error('Please provide 2 file names!');
+          } else {
+            let output = [[],[]];
 
-        console.time('MERGE');
+            console.time('MERGE');
 
-        const fileOne = await readFile(firstFile, 'utf8');
-        const fileTwo = await readFile(secondFile, 'utf8');
+            const fileOne = await readFile(firstFile, 'utf8');
+            const fileTwo = await readFile(secondFile, 'utf8');
 
-        output[0].push(...fileOne.split('\n'));
-        output[1].push(...fileTwo.split('\n'));
+            output[0].push(...fileOne.split('\n'));
+            output[1].push(...fileTwo.split('\n'));
 
-        const outputFile = 'output.txt';
-        let outputString = '';
-        const lengthA = output[0].length;
-        const lengthB = output[1].length;
-        const max = lengthA > lengthB ? lengthA : lengthB;
+            const outputFile = 'output.txt';
+            let outputString = '';
+            const lengthA = output[0].length;
+            const lengthB = output[1].length;
+            const max = lengthA > lengthB ? lengthA : lengthB;
 
-        for (let i = 0; i < max; i++) {
-        let first = output[0][i] || '';
-        let second = output[1][i] || '';
+            for (let i = 0; i < max; i++) {
+              let first = output[0][i] || '';
+              let second = output[1][i] || '';
+              outputString += `${first} ${second} \n`;
+            }
 
-        outputString += `${first} ${second} \n`;
-        }
+            console.timeEnd('MERGE');
 
-        console.timeEnd('MERGE');
-
-        fs.writeFile(outputFile, outputString, err => {
-        if (err) {
-        console.error(err);
-        } else {
-        console.log('Files merged! Check "output.txt".')
-        }
-        });
-        }
+            fs.writeFile(outputFile, outputString, err => {
+              if (err) {
+                console.error(err);
+              } else {
+                console.log('Files merged! Check "output.txt".')
+              }
+            });
+          }
         })();
       </CodeSnippet>
 
@@ -157,56 +154,55 @@
         const secondFile = process.argv[3];
 
         (async _ => {
-        if (!firstFile || !secondFile) {
-        console.error('Please provide 2 file names!');
-        } else {
-        let output = [[],[]];
+          if (!firstFile || !secondFile) {
+            console.error('Please provide 2 file names!');
+          } else {
+            let output = [[],[]];
 
-        console.time('MERGE');
+            console.time('MERGE');
 
-        await pipeline(
-        fs.createReadStream(firstFile, 'utf8'),
-        async data => {
-        for await (const chunk of data) {
-        const split = chunk.split('\n');
-        output[0].push(...split);
-        }
-        }
-        );
+            await pipeline(
+              fs.createReadStream(firstFile, 'utf8'),
+              async data => {
+                for await (const chunk of data) {
+                  const split = chunk.split('\n');
+                  output[0].push(...split);
+                }
+              }
+            );
 
-        await pipeline(
-        fs.createReadStream(secondFile, 'utf8'),
-        async data => {
-        for await (const chunk of data) {
-        const split = chunk.split('\n');
-        output[1].push(...split);
-        }
-        }
-        );
+            await pipeline(
+              fs.createReadStream(secondFile, 'utf8'),
+              async data => {
+                for await (const chunk of data) {
+                  const split = chunk.split('\n');
+                  output[1].push(...split);
+                }
+              }
+            );
 
-        const outputFile = 'output.txt';
-        let outputString = '';
-        const lengthA = output[0].length;
-        const lengthB = output[1].length;
-        const max = lengthA > lengthB ? lengthA : lengthB;
+            const outputFile = 'output.txt';
+            let outputString = '';
+            const lengthA = output[0].length;
+            const lengthB = output[1].length;
+            const max = lengthA > lengthB ? lengthA : lengthB;
 
-        for (let i = 0; i < max; i++) {
-        let first = output[0][i] || '';
-        let second = output[1][i] || '';
+            for (let i = 0; i < max; i++) {
+              let first = output[0][i] || '';
+              let second = output[1][i] || '';
+              outputString += `${first} ${second} \n`;
+            }
 
-        outputString += `${first} ${second} \n`;
-        }
+            console.timeEnd('MERGE');
 
-        console.timeEnd('MERGE');
-
-        fs.writeFile(outputFile, outputString, err => {
-        if (err) {
-        console.error(err);
-        } else {
-        console.log('Files merged! Check "output.txt".')
-        }
-        });
-        }
+            fs.writeFile(outputFile, outputString, err => {
+              if (err) {
+                console.error(err);
+              } else {
+                console.log('Files merged! Check "output.txt".')
+              }
+            });
+          }
         })()
       </CodeSnippet>
 
@@ -242,87 +238,86 @@
         const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz1234567890', 10);
 
         const upload = multer({
-        storage: multer.memoryStorage()
+          storage: multer.memoryStorage()
         });
 
         const filesUpload = upload.fields([
-        {name: 'first', maxCount: 1},
-        {name: 'second', maxCount: 1}
+          {name: 'first', maxCount: 1},
+          {name: 'second', maxCount: 1}
         ]);
 
         app.set('view engine', 'hbs');
 
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({
-        extended: true
+          extended: true
         }));
         app.use(express.json());
 
         app.get('/', (req, res) => {
-        res.render('index');
+          res.render('index');
         });
 
         app.get('/download', (req, res) => {
-        const id = req.query.id;
+          const id = req.query.id;
 
-        if (!id) {
-        return res.redirect('/');
-        }
-        res.render('download', { id });
+          if (!id) {
+            return res.redirect('/');
+          }
+          res.render('download', { id });
         });
 
         app.post('/rest/merge', filesUpload, async (req, res, next) => {
-        const file1 = req.files.first[0].buffer.toString();
-        const file2 = req.files.second[0].buffer.toString();
+          const file1 = req.files.first[0].buffer.toString();
+          const file2 = req.files.second[0].buffer.toString();
 
-        const output = mergeFiles(file1, file2);
-        const id = nanoid();
+          const output = mergeFiles(file1, file2);
+          const id = nanoid();
 
-        try {
-        await writeFile(`downloads/${id}.txt`, output);
-        return res.redirect(`/download?id=${id}`);
-        } catch (e) {
-        return next(e);
-        }
-
+          try {
+            await writeFile(`downloads/${id}.txt`, output);
+            return res.redirect(`/download?id=${id}`);
+          } catch (e) {
+            return next(e);
+          }
         });
 
         app.get('/rest/download/:id', async (req, res, next) => {
-        const id = req.params.id;
-        if (!id) {
-        return res.redirect('/');
-        }
+          const id = req.params.id;
+          if (!id) {
+            return res.redirect('/');
+          }
 
-        res.download(path.join(__dirname, `downloads/${id}.txt`), 'merge.txt');
+          res.download(path.join(__dirname, `downloads/${id}.txt`), 'merge.txt');
 
-        fs.unlink(`downloads/${id}.txt`, () => {});
+          fs.unlink(`downloads/${id}.txt`, () => {});
         });
 
         app.use((err, req, res, next) => {
-        console.error('Error', err);
+          console.error('Error', err);
         });
 
         app.listen(3000, () => {
-        console.log('Servers started on port 3000.');
+          console.log('Servers started on port 3000.');
         });
 
         function mergeFiles(fileOne, fileTwo) {
-        const output = [[],[]];
-        output[0].push(...fileOne.split('\n'));
-        output[1].push(...fileTwo.split('\n'));
+          const output = [[],[]];
+          output[0].push(...fileOne.split('\n'));
+          output[1].push(...fileTwo.split('\n'));
 
-        let outputString = '';
-        const lengthA = output[0].length;
-        const lengthB = output[1].length;
-        const max = lengthA > lengthB ? lengthA : lengthB;
+          let outputString = '';
+          const lengthA = output[0].length;
+          const lengthB = output[1].length;
+          const max = lengthA > lengthB ? lengthA : lengthB;
 
-        for (let i = 0; i < max; i++) {
-        let first = output[0][i] || '';
-        let second = output[1][i] || '';
+          for (let i = 0; i < max; i++) {
+            let first = output[0][i] || '';
+            let second = output[1][i] || '';
 
-        outputString += `${first} ${second} \n`;
-        }
-        return outputString;
+            outputString += `${first} ${second} \n`;
+          }
+          return outputString;
         }
       </CodeSnippet>
     </Exercise>
@@ -421,7 +416,7 @@ export default defineComponent({
     async saveFile(file: 'fileOne' | 'fileTwo', files: FileList) {
       const text = await files.item(0)?.text();
       if (text) {
-         this[file] = text;
+        this[file] = text;
       }
     },
 
