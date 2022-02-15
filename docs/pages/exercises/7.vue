@@ -5,7 +5,7 @@
         Implementierung number_file_gen.js
       </Question>
       <div class="my-2">
-        <Button @click="clickOpenModal('num')">
+        <Button @click="clickOpenGenerateModal('num')">
           Click to generate file ...
         </Button>
       </div>
@@ -37,7 +37,7 @@
         Implementierung alpha_file_gen.js
       </Question>
       <div class="my-2">
-        <Button @click="clickOpenModal('alpha')">
+        <Button @click="clickOpenGenerateModal('alpha')">
           Click to generate file ...
         </Button>
       </div>
@@ -87,6 +87,11 @@
       <Question>
         Implementierung merge_files.js
       </Question>
+      <div class="my-2">
+        <Button @click="clickOpenMergeModal()">
+          Click to merge files ...
+        </Button>
+      </div>
       <CodeSnippet lang="js">
         import * as fs from 'fs';
         import * as util from 'util';
@@ -322,16 +327,45 @@
       </CodeSnippet>
     </Exercise>
 
-    <Modal :open="isModalOpen" @close="clickCloseModal">
+    <Modal :open="isGenerateModalOpen" @close="clickCloseModal">
       <template #header>
         Datei erstellen
       </template>
 
       <template #body>
         <LoadingAnimation v-if="isLoading"/>
-        <BaseForm v-else :netlify="false" name="form" @submit.prevent="submitForm">
+        <BaseForm v-else :netlify="false" name="form" @submit.prevent="submitGenerateForm">
           <FormInput id="length" name="length" type="number" v-model.number="count" label="Anzahl der Zeilen" required
                      description="Gib an, wie viele Zeilen die Datei enthalten soll." min="1" max="10000"
+          />
+
+          <div class="mt-4 text-right">
+            <Button variant="secondary" @click="clickCloseModal">Abbrechen</Button>
+            <Button type="submit">Erstellen</Button>
+          </div>
+        </BaseForm>
+      </template>
+
+      <template #footer>
+        <hr>
+        <span class="text-sm text-gray-500">Running on Netlify Functions</span>
+      </template>
+    </Modal>
+
+    <Modal :open="isMergeModalOpen" @close="clickCloseModal">
+      <template #header>
+        Dateien hochladen und mergen
+      </template>
+
+      <template #body>
+        <LoadingAnimation v-if="isLoading"/>
+        <BaseForm v-else :netlify="false" name="form" @submit.prevent="submitMergeForm">
+          <FormInput id="one" name="one" type="file" label="Datei 1" required
+                     description="Lade die erste Datei hoch." accept=".txt" @change="saveFile('fileOne', $event)"
+          />
+
+          <FormInput id="two" name="two" type="file" label="Datei 2" required
+                     description="Lade die zweite Datei hoch." accept=".txt" @change="saveFile('fileTwo', $event)"
           />
 
           <div class="mt-4 text-right">
@@ -361,7 +395,7 @@ import Modal from '~/components/Modal.vue';
 import BaseForm from '~/components/form/BaseForm.vue';
 import BaseInput from '~/components/form/BaseInput.vue';
 import FormInput from '~/components/form/FormInput.vue';
-import {fetchData, FileType, saveFile} from '~/utils/fileSaver';
+import {FileType, generateFile, mergeFiles, saveFile} from '~/utils/RESTController';
 import LoadingAnimation from '~/components/animations/LoadingAnimation.vue';
 import {ToastVariant} from '~/plugins/toast/Toast';
 
@@ -373,48 +407,93 @@ export default defineComponent({
 
   data() {
     return {
-      isModalOpen: false,
+      isGenerateModalOpen: false,
+      isMergeModalOpen: false,
       count: 0,
       selectedType: 'num' as FileType,
       isLoading: false,
+      fileOne: '',
+      fileTwo: '',
     };
   },
 
   methods: {
-    clickOpenModal(type: FileType) {
-      this.isModalOpen = true;
+    async saveFile(file: 'fileOne' | 'fileTwo', files: FileList) {
+      const text = await files.item(0)?.text();
+      if (text) {
+         this[file] = text;
+      }
+    },
+
+    clickOpenGenerateModal(type: FileType) {
+      this.isGenerateModalOpen = true;
       this.selectedType = type;
     },
 
+    clickOpenMergeModal() {
+      this.isMergeModalOpen = true;
+    },
+
     clickCloseModal() {
-      this.isModalOpen = false;
+      this.isGenerateModalOpen = false;
+      this.isMergeModalOpen = false;
       this.selectedType = 'num';
       this.count = 0;
       this.isLoading = false;
+      this.fileOne = '';
+      this.fileTwo = '';
     },
 
-    async submitForm() {
+    async submitGenerateForm() {
       try {
+        if (this.isLoading) {
+          return;
+        }
+
         this.isLoading = true;
         const count = this.count, type = this.selectedType;
 
-        const data = await fetchData(type, count);
+        const data = await generateFile(type, count);
+        this._showSuccessToast();
+
         saveFile(data, 'download.txt', 'text/plain');
       } catch (e) {
-        console.error(e);
         this.$toaster('Fehler', `Fehler beim Erstellen der Datei: ${e.message}`, {
           variant: ToastVariant.ERROR
         }).show();
       } finally {
+        this.isLoading = false;
         this.clickCloseModal();
       }
+    },
+
+    async submitMergeForm() {
+      try {
+        if (this.isLoading) {
+          return;
+        }
+
+        this.isLoading = true;
+
+        const data = await mergeFiles(this.fileOne, this.fileTwo);
+        this._showSuccessToast();
+
+        saveFile(data, 'download.txt', 'text/plain');
+      } catch (e) {
+        this.$toaster('Fehler', `Fehler beim Erstellen der Datei: ${e.message}`, {
+          variant: ToastVariant.ERROR
+        }).show();
+      } finally {
+        this.isLoading = false;
+        this.clickCloseModal();
+      }
+    },
+
+    _showSuccessToast() {
+      this.$toaster('Erfolgreich', 'Datei erfolgreich erstellt', {
+        variant: ToastVariant.SUCCESS
+      }).show();
     }
   },
-
-  setup() {
-    async function clickDownloadFile(type: 'num' | 'alpha', count: number) {
-
-    }
-  }
 });
 </script>

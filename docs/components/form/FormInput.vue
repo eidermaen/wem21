@@ -1,7 +1,7 @@
 <template>
   <BaseInput :id="id" :label="label" :required="required">
     <input :value="value" :type="$attrs.type" :id="id" :name="name" :required="required" :placeholder="$attrs.placeholder"
-           class="form-input" @input="$emit('input', $event.target.value)" v-bind="$attrs"
+           class="form-input" @input="$emit('input', $event.target.value)" v-bind="$attrs" @change="onChange"
     >
     <div class="text-gray-400 text-sm pl-1" v-if="description">
       {{ description }}
@@ -44,5 +44,13 @@ export default defineComponent({
       required: false,
     }
   },
+
+  methods: {
+    onChange(event: any) {
+      if (this.$attrs.type === 'file') {
+        this.$emit('change', event.target.files);
+      }
+    }
+  }
 });
 </script>

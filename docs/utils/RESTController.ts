@@ -1,5 +1,4 @@
 // Found on: https://stackoverflow.com/questions/13405129/javascript-create-and-save-file
-
 export function saveFile(data: string, filename: string, type: string) {
   const file = new Blob([data], { type });
   if (window.navigator.msSaveOrOpenBlob) { // IE10+
@@ -21,9 +20,9 @@ export function saveFile(data: string, filename: string, type: string) {
 
 export type FileType = 'num' | 'alpha';
 
-export async function fetchData(type: FileType, count: number): Promise<string> {
+export async function generateFile(type: FileType, count: number): Promise<string> {
   try {
-    const response = await fetch('/.netlify/functions/filegen', {
+    const response = await fetch('/api/filegen', {
       method: 'POST',
       body: JSON.stringify({
         type,
@@ -33,6 +32,27 @@ export async function fetchData(type: FileType, count: number): Promise<string> 
     const json = await response.json();
     return json.data;
   } catch (e) {
-    throw new Error('Unable to fetch data');
+    throw handleError(e);
   }
+}
+
+export async function mergeFiles(one: string, two: string): Promise<string> {
+  try {
+    const response = await fetch('/api/filemerge', {
+      method: 'POST',
+      body: JSON.stringify({
+        one,
+        two
+      })
+    });
+    const json = await response.json();
+    return json.data;
+  } catch (e) {
+    throw handleError(e);
+  }
+}
+
+function handleError(e: Error) {
+  console.error(e);
+  throw new Error('Unable to fetch data. See console for more information.');
 }
