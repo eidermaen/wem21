@@ -30,19 +30,19 @@
 }
 
 .toaster-error {
-  @apply bg-red-400 border-red-600 text-red-900;
+  @apply bg-red-500 border-red-600 text-white;
 }
 
 .toaster-success {
-  @apply bg-green-400 border-green-600 text-green-900;
+  @apply bg-green-200 border-green-600 text-green-700;
 }
 
 .toaster-info {
-  @apply bg-blue-300 border-blue-600 text-blue-900;
+  @apply bg-blue-200 border-blue-600 text-blue-700;
 }
 
 .toaster-warning {
-  @apply bg-yellow-300 border-yellow-400 text-gray-600;
+  @apply bg-yellow-400 border-yellow-500 text-white;
 }
 
 .toaster .title {
