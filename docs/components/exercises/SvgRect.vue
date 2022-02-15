@@ -30,7 +30,6 @@ export default defineComponent({
 
   methods: {
     onMouseChange(hovered: boolean) {
-      console.log('hovered', hovered);
       this.$emit('change', hovered);
     }
   },
