@@ -3,7 +3,7 @@ export enum ToastVariant {
   WARNING = 'warning',
   INFO = 'info',
   ERROR = 'error',
-};
+}
 
 export interface ToastOptions {
   autoDestroy?: boolean;
@@ -11,10 +11,13 @@ export interface ToastOptions {
   variant?: ToastVariant;
 
   onClose?(): any;
-};
+}
 
 interface ToastData {
-  [key: string]: HTMLElement
+  [key: string]: {
+    elem: HTMLElement,
+    order: Date
+  }
 }
 
 const CREATED_TOASTS: ToastData = {};
@@ -27,6 +30,7 @@ export class Toast {
   private readonly options: ToastOptions;
   private readonly elem: HTMLElement;
   private timeout?: NodeJS.Timeout;
+  private readonly padding = 10;
 
   private constructor(title: string, message?: string, options?: ToastOptions) {
     // ID between 0 and 100
@@ -49,7 +53,10 @@ export class Toast {
   }
 
   public show() {
-    CREATED_TOASTS[this.id] = this.elem;
+    CREATED_TOASTS[this.id] = {
+      elem: this.elem,
+      order: new Date()
+    };
     document.body.appendChild(this.elem);
 
     setTimeout(() => {
@@ -72,6 +79,7 @@ export class Toast {
     this.elem.classList.toggle('toaster-hide');
 
     setTimeout(() => {
+      this.unshiftToasts();
       document.body.removeChild(this.elem);
       delete CREATED_TOASTS[this.id];
     }, 500);
@@ -135,17 +143,34 @@ export class Toast {
     elem.classList.add('toaster', 'toaster-hide', variantStyle);
   }
 
-  private shiftToasts() {
-    const currentHeight = this.elem.offsetHeight;
-    const padding = 10;
+  private unshiftToasts() {
+    const elemToDelete = CREATED_TOASTS[this.id];
 
     for (let key in CREATED_TOASTS) {
-      if (key !== this.id) {
-        const el = CREATED_TOASTS[key];
-        const style = window.getComputedStyle(el);
-        const matrix = new DOMMatrixReadOnly(style.transform);
-        el.style.transform = `translateY(${matrix.m42 + currentHeight + padding}px)`;
+      const {elem: el, order} = CREATED_TOASTS[key];
+
+      if (key !== this.id && elemToDelete.order > order) {
+        this.doShift(el, (currentY, currentHeight, padding) => {
+          return currentY - currentHeight - padding;
+        });
       }
     }
+  }
+
+  private shiftToasts() {
+    for (let key in CREATED_TOASTS) {
+      if (key !== this.id) {
+        const {elem: el} = CREATED_TOASTS[key];
+        this.doShift(el, (currentY, currentHeight, padding) => {
+          return currentY + currentHeight + padding;
+        });
+      }
+    }
+  }
+
+  private doShift(el: HTMLElement, cb: (currentY: number, currentHeight: number, padding: number) => number) {
+    const style = window.getComputedStyle(el);
+    const matrix = new DOMMatrixReadOnly(style.transform);
+    el.style.transform = `translateY(${cb(matrix.m42, this.elem.offsetHeight, this.padding)}px)`;
   }
 }

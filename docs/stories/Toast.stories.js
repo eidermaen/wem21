@@ -34,9 +34,13 @@ export default {
     autoDestroy: {
       description: 'Whether the toast should close by itself or only by user interaction.',
       control: {
-        type: 'boolean'
+        type: 'radio',
+        options: {
+          'true': true,
+          'false': false,
+        },
       },
-      defaultValue: true
+      defaultValue: true,
     },
     timeout: {
       description: 'Time in ms how long the toast should be displayed',
