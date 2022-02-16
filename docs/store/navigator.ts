@@ -1,7 +1,13 @@
 import {NavigatorData} from '~/data/NavigatorData';
 
-export const state = {
-  data: {} as NavigatorData,
+export interface NavigatorState {
+  data: NavigatorData,
+  selectedTop: string,
+  selectedLeft: string,
+}
+
+export const state: NavigatorState = {
+  data: {},
   selectedTop: '',
   selectedLeft: '',
 };

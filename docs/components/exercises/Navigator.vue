@@ -56,6 +56,7 @@ import {ToastVariant} from '~/plugins/toast/Toast';
 import NavigatorMenu from '~/components/exercises/NavigatorMenu.vue';
 import NavigatorItem from '~/components/exercises/NavigatorItem.vue';
 import {NavigatorData} from '~/data/NavigatorData';
+import {NavigatorState} from '~/store/navigator';
 
 const _restURL = 'https://www2.inf.h-brs.de/~jitter2s/wem/navigator_contents.json';
 
@@ -82,7 +83,7 @@ export default defineComponent({
       switch (position) {
         case 'top':
           await this.$store.dispatch('navigator/setTop', key);
-          this._pushHistory(key, this.data.selectedLeft);
+          this._pushHistory(key, this.data.selectedTop);
           break;
         case 'left':
           await this.$store.dispatch('navigator/setLeft', key);
@@ -93,7 +94,7 @@ export default defineComponent({
   },
 
   computed: {
-    data(): NavigatorData {
+    data(): NavigatorState {
       return this.$store.state.navigator
     }
   },
