@@ -1,5 +1,5 @@
 <template>
-  <svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="500" height="400" viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="500" height="500" fill="white"/>
     <g>
       <text v-for="(party, index) in data" :key="`label-${index}`" x="10" :y="getY(index)" fill="black">

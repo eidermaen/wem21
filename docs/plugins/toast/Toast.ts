@@ -170,6 +170,7 @@ export class Toast {
 
   private doShift(el: HTMLElement, cb: (currentY: number, currentHeight: number, padding: number) => number) {
     const style = window.getComputedStyle(el);
+    // https://stackoverflow.com/questions/42267189/how-to-get-value-translatex-by-javascript
     const matrix = new DOMMatrixReadOnly(style.transform);
     el.style.transform = `translateY(${cb(matrix.m42, this.elem.offsetHeight, this.padding)}px)`;
   }
