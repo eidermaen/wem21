@@ -6,14 +6,6 @@ export default {
     fallback: true,
   },
 
-  proxy: {
-    '/api': {
-      pathRewrite: {
-        '^/api': '/.netlify/functions'
-      }
-    },
-  },
-
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'WEM | Jona Ittermann',

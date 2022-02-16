@@ -22,7 +22,7 @@ export type FileType = 'num' | 'alpha';
 
 export async function generateFile(type: FileType, count: number): Promise<string> {
   try {
-    const response = await fetch('/api/filegen', {
+    const response = await fetch('/.netlify/functions/filegen', {
       method: 'POST',
       body: JSON.stringify({
         type,
@@ -38,7 +38,7 @@ export async function generateFile(type: FileType, count: number): Promise<strin
 
 export async function mergeFiles(one: string, two: string): Promise<string> {
   try {
-    const response = await fetch('/api/filemerge', {
+    const response = await fetch('/.netlify/functions/filemerge', {
       method: 'POST',
       body: JSON.stringify({
         one,
