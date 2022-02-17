@@ -61,7 +61,7 @@ import {defineComponent} from '@nuxtjs/composition-api';
 export default defineComponent({
   setup() {
     const onClickCommand = (command: string) => {
-      if (['h1', 'h2', 'p'].includes(command)) {
+      if (['h1', 'h2', 'h3', 'p'].includes(command)) {
         document.execCommand('formatBlock', false, command);
       } else if (['createLink', 'insertimage'].includes(command)) {
         const url = prompt('Enter the link here:', 'https:\/\/');
@@ -122,9 +122,21 @@ export default defineComponent({
   @apply w-full outline-none mt-2 p-2 border-2 border-blue-600 rounded transition-all duration-200 resize-y focus:border-green-500;
 }
 
-#editor a {
+#editor >>> a {
   text-decoration: underline !important;
   color: #26C485 !important;
+}
+
+#editor >>> h1 {
+  @apply text-3xl;
+}
+
+#editor >>> h2 {
+  @apply text-2xl;
+}
+
+#editor >>> h3 {
+  @apply text-xl;
 }
 
 </style>
