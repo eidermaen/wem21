@@ -76,13 +76,12 @@ export class Toast {
       clearTimeout(this.timeout);
     }
 
-    this.elem.classList.toggle('toaster-hide');
-
-    setTimeout(() => {
+    this.elem.addEventListener('transitionend', () => {
       this.unshiftToasts();
       document.body.removeChild(this.elem);
       delete CREATED_TOASTS[this.id];
-    }, 500);
+    });
+    this.elem.classList.toggle('toaster-hide');
   }
 
   private generateHTML(): HTMLElement {
