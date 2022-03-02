@@ -1,6 +1,7 @@
 # Web Engineering WiSe 2021
 
 > Jona Ittermann
+> 
 > Hochschule Bonn-Rhein-Sieg
 
 ## About 
