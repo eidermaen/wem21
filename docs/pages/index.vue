@@ -5,12 +5,6 @@
       <p>Built with NuxtJS and TailwindCSS</p>
     </div>
 
-    <div class="my-8">
-      <Info title="Under development" variant="danger">
-        This page is still under development and not in a final state, yet. Content might and will change.
-      </Info>
-    </div>
-
     <FlyDelay>
       <div class="mt-6 ">
         <h2 class="text-3xl">Aufgaben</h2>
