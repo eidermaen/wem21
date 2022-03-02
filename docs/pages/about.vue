@@ -79,7 +79,7 @@
         Das Deployment der Seite geschieht über
         <CustomAnchor target="_blank" href="https://netlify.com">Netlify</CustomAnchor>.
         Netlify hat dabei eine Verbindung zum Git-Repository, in dem der Code für die Seite liegt.
-        Jedes Mal, wenn auf den <strong>deployment</strong> Branch committed wird, wird ein Rebuild der Seite durch
+        Jedes Mal, wenn auf den <strong>master</strong> Branch committed wird, wird ein Rebuild der Seite durch
         Netlify getriggered und die Homepage im Netlify-CDN neu deployed.
       </p>
     </div>
